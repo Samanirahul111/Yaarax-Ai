@@ -1,0 +1,1882 @@
+{
+  "timestamp": "2026-04-21T18:31:38.589Z",
+  "totalModels": 8,
+  "totalTests": 15,
+  "summary": [
+    {
+      "rank": 5,
+      "model": "Gemini 2.5 Pro Preview",
+      "modelId": "gemini-2.5-pro-preview-03-25",
+      "provider": "Google",
+      "accuracyPct": 0,
+      "avgSpeedMs": 0,
+      "availability": 0,
+      "passedTests": 0,
+      "failedTests": 15
+    },
+    {
+      "rank": 2,
+      "model": "LLaMA 3.3 70B (Versatile)",
+      "modelId": "llama-3.3-70b-versatile",
+      "provider": "Groq",
+      "accuracyPct": 90,
+      "avgSpeedMs": 332,
+      "availability": 100,
+      "passedTests": 15,
+      "failedTests": 0
+    },
+    {
+      "rank": 3,
+      "model": "LLaMA 3.1 8B (Instant)",
+      "modelId": "llama-3.1-8b-instant",
+      "provider": "Groq",
+      "accuracyPct": 90,
+      "avgSpeedMs": 274,
+      "availability": 100,
+      "passedTests": 15,
+      "failedTests": 0
+    },
+    {
+      "rank": 4,
+      "model": "LLaMA 4 Scout 17B",
+      "modelId": "meta-llama/llama-4-scout-17b-16e-instruct",
+      "provider": "Groq",
+      "accuracyPct": 90,
+      "avgSpeedMs": 216,
+      "availability": 100,
+      "passedTests": 15,
+      "failedTests": 0
+    },
+    {
+      "rank": 5,
+      "model": "Gemini 2.5 Pro Preview",
+      "modelId": "gemini-2.5-pro-preview-03-25",
+      "provider": "Google",
+      "accuracyPct": 0,
+      "avgSpeedMs": 0,
+      "availability": 0,
+      "passedTests": 0,
+      "failedTests": 15
+    },
+    {
+      "rank": 6,
+      "model": "Gemini 2.5 Flash Preview",
+      "modelId": "gemini-2.5-flash-preview-04-17",
+      "provider": "Google",
+      "accuracyPct": 0,
+      "avgSpeedMs": 0,
+      "availability": 0,
+      "passedTests": 0,
+      "failedTests": 15
+    },
+    {
+      "rank": 7,
+      "model": "Gemini 2.0 Flash",
+      "modelId": "gemini-2.0-flash",
+      "provider": "Google",
+      "accuracyPct": 0,
+      "avgSpeedMs": 0,
+      "availability": 0,
+      "passedTests": 0,
+      "failedTests": 15
+    },
+    {
+      "rank": 8,
+      "model": "Gemini 2.0 Flash Lite",
+      "modelId": "gemini-2.0-flash-lite",
+      "provider": "Google",
+      "accuracyPct": 0,
+      "avgSpeedMs": 0,
+      "availability": 0,
+      "passedTests": 0,
+      "failedTests": 15
+    }
+  ],
+  "detailed": [
+    {
+      "model": "Qwen3 32B",
+      "modelId": "qwen/qwen3-32b",
+      "provider": "Groq",
+      "avgScore": 93,
+      "avgMs": 904,
+      "availability": 100,
+      "successCount": 15,
+      "failCount": 0,
+      "totalTests": 15,
+      "results": [
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "What is the capital of France?",
+          "responseText": "The capital of France is Paris.",
+          "score": 100,
+          "ms": 657,
+          "error": null,
+          "matched": [
+            "paris"
+          ],
+          "keywords": [
+            "paris"
+          ]
+        },
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "Who invented the telephone?",
+          "responseText": "The telephone was invented by **Alexander Graham Bell**, who was granted the first U.S. patent for the invention in 1876. However, there were disputes over the invention, with **Elisha Gray** and **Antonio Meucci** also credited by some historians for their contributions. Bell's patent was awarded f",
+          "score": 100,
+          "ms": 1027,
+          "error": null,
+          "matched": [
+            "bell",
+            "alexander"
+          ],
+          "keywords": [
+            "bell",
+            "alexander"
+          ]
+        },
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "What is the speed of light in km/s? Give only the number.",
+          "responseText": "<think>\nOkay, the user is asking for the speed of light in kilometers per second and wants only the number. Let me recall the exact value. The speed of light in a vacuum is a fundamental constant. I think it's approximately 299,792 kilometers per second. Wait, let me double-check that. Yes, the exac",
+          "score": 100,
+          "ms": 1229,
+          "error": null,
+          "matched": [
+            "299",
+            "300"
+          ],
+          "keywords": [
+            "299",
+            "300"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "A train travels at 60 mph for 2.5 hours. How many miles does it travel? Answer with the number only.",
+          "responseText": "150",
+          "score": 100,
+          "ms": 713,
+          "error": null,
+          "matched": [
+            "150"
+          ],
+          "keywords": [
+            "150"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "What is 17 multiplied by 23? Answer with the number only.",
+          "responseText": "391",
+          "score": 100,
+          "ms": 709,
+          "error": null,
+          "matched": [
+            "391"
+          ],
+          "keywords": [
+            "391"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "If you have 3 apples and give away 2, how many do you have?",
+          "responseText": "You have 1 apple left.  \n**Answer:** 1",
+          "score": 50,
+          "ms": 920,
+          "error": null,
+          "matched": [
+            "1"
+          ],
+          "keywords": [
+            "1",
+            "one"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What is the chemical formula for water?",
+          "responseText": "The chemical formula for water is **H₂O**, consisting of two hydrogen atoms and one oxygen atom per molecule.",
+          "score": 50,
+          "ms": 320,
+          "error": null,
+          "matched": [
+            "h₂o"
+          ],
+          "keywords": [
+            "h2o",
+            "h₂o"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What planet is closest to the Sun?",
+          "responseText": "Mercury is the planet closest to the Sun.",
+          "score": 100,
+          "ms": 396,
+          "error": null,
+          "matched": [
+            "mercury"
+          ],
+          "keywords": [
+            "mercury"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What process do plants use to make food from sunlight?",
+          "responseText": "Plants use **photosynthesis** to convert sunlight, carbon dioxide, and water into glucose (food) and oxygen. This process occurs in chloroplasts, utilizing chlorophyll to capture light energy.",
+          "score": 100,
+          "ms": 720,
+          "error": null,
+          "matched": [
+            "photosynthesis"
+          ],
+          "keywords": [
+            "photosynthesis"
+          ]
+        },
+        {
+          "category": "💻 Coding",
+          "prompt": "Write a simple Python function to check if a number is even. Show code only.",
+          "responseText": "```python\ndef is_even(num):\n    return num % 2 == 0\n```",
+          "score": 100,
+          "ms": 1025,
+          "error": null,
+          "matched": [
+            "def",
+            "return",
+            "%",
+            "== 0",
+            "even"
+          ],
+          "keywords": [
+            "def",
+            "return",
+            "%",
+            "== 0",
+            "even"
+          ]
+        },
+        {
+          "category": "💻 Coding",
+          "prompt": "What does HTML stand for?",
+          "responseText": "HTML stands for **HyperText Markup Language**.",
+          "score": 100,
+          "ms": 414,
+          "error": null,
+          "matched": [
+            "hypertext",
+            "markup",
+            "language"
+          ],
+          "keywords": [
+            "hypertext",
+            "markup",
+            "language"
+          ]
+        },
+        {
+          "category": "📜 History",
+          "prompt": "In which year did World War II end?",
+          "responseText": "World War II ended in **1945**.",
+          "score": 100,
+          "ms": 413,
+          "error": null,
+          "matched": [
+            "1945"
+          ],
+          "keywords": [
+            "1945"
+          ]
+        },
+        {
+          "category": "📜 History",
+          "prompt": "Who was the first person to walk on the Moon?",
+          "responseText": "The first person to walk on the Moon was **Neil Armstrong**, during the Apollo 11 mission on July 20, 1969. He famously said, \"That's one small step for man, one giant leap for mankind.\"",
+          "score": 100,
+          "ms": 827,
+          "error": null,
+          "matched": [
+            "armstrong",
+            "neil"
+          ],
+          "keywords": [
+            "armstrong",
+            "neil"
+          ]
+        },
+        {
+          "category": "🧠 Logic",
+          "prompt": "If all cats are animals and all animals need food, do cats need food? Answer yes or no.",
+          "responseText": "Yes.",
+          "score": 100,
+          "ms": 3885,
+          "error": null,
+          "matched": [
+            "yes"
+          ],
+          "keywords": [
+            "yes"
+          ]
+        },
+        {
+          "category": "🧠 Logic",
+          "prompt": "What comes next in the sequence: 2, 4, 8, 16, __?",
+          "responseText": "32",
+          "score": 100,
+          "ms": 312,
+          "error": null,
+          "matched": [
+            "32"
+          ],
+          "keywords": [
+            "32"
+          ]
+        }
+      ]
+    },
+    {
+      "model": "LLaMA 3.3 70B (Versatile)",
+      "modelId": "llama-3.3-70b-versatile",
+      "provider": "Groq",
+      "avgScore": 90,
+      "avgMs": 332,
+      "availability": 100,
+      "successCount": 15,
+      "failCount": 0,
+      "totalTests": 15,
+      "results": [
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "What is the capital of France?",
+          "responseText": "Paris.",
+          "score": 100,
+          "ms": 802,
+          "error": null,
+          "matched": [
+            "paris"
+          ],
+          "keywords": [
+            "paris"
+          ]
+        },
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "Who invented the telephone?",
+          "responseText": "Alexander Graham Bell.",
+          "score": 100,
+          "ms": 321,
+          "error": null,
+          "matched": [
+            "bell",
+            "alexander"
+          ],
+          "keywords": [
+            "bell",
+            "alexander"
+          ]
+        },
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "What is the speed of light in km/s? Give only the number.",
+          "responseText": "299,792",
+          "score": 50,
+          "ms": 307,
+          "error": null,
+          "matched": [
+            "299"
+          ],
+          "keywords": [
+            "299",
+            "300"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "A train travels at 60 mph for 2.5 hours. How many miles does it travel? Answer with the number only.",
+          "responseText": "150",
+          "score": 100,
+          "ms": 309,
+          "error": null,
+          "matched": [
+            "150"
+          ],
+          "keywords": [
+            "150"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "What is 17 multiplied by 23? Answer with the number only.",
+          "responseText": "391",
+          "score": 100,
+          "ms": 286,
+          "error": null,
+          "matched": [
+            "391"
+          ],
+          "keywords": [
+            "391"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "If you have 3 apples and give away 2, how many do you have?",
+          "responseText": "1.",
+          "score": 50,
+          "ms": 320,
+          "error": null,
+          "matched": [
+            "1"
+          ],
+          "keywords": [
+            "1",
+            "one"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What is the chemical formula for water?",
+          "responseText": "H2O.",
+          "score": 50,
+          "ms": 307,
+          "error": null,
+          "matched": [
+            "h2o"
+          ],
+          "keywords": [
+            "h2o",
+            "h₂o"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What planet is closest to the Sun?",
+          "responseText": "Mercury.",
+          "score": 100,
+          "ms": 313,
+          "error": null,
+          "matched": [
+            "mercury"
+          ],
+          "keywords": [
+            "mercury"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What process do plants use to make food from sunlight?",
+          "responseText": "Photosynthesis.",
+          "score": 100,
+          "ms": 506,
+          "error": null,
+          "matched": [
+            "photosynthesis"
+          ],
+          "keywords": [
+            "photosynthesis"
+          ]
+        },
+        {
+          "category": "💻 Coding",
+          "prompt": "Write a simple Python function to check if a number is even. Show code only.",
+          "responseText": "```python\ndef is_even(n):\n    return n % 2 == 0\n\n# Example usage:\nprint(is_even(10))  # True\nprint(is_even(11))  # False\n```",
+          "score": 100,
+          "ms": 290,
+          "error": null,
+          "matched": [
+            "def",
+            "return",
+            "%",
+            "== 0",
+            "even"
+          ],
+          "keywords": [
+            "def",
+            "return",
+            "%",
+            "== 0",
+            "even"
+          ]
+        },
+        {
+          "category": "💻 Coding",
+          "prompt": "What does HTML stand for?",
+          "responseText": "Hypertext Markup Language.",
+          "score": 100,
+          "ms": 135,
+          "error": null,
+          "matched": [
+            "hypertext",
+            "markup",
+            "language"
+          ],
+          "keywords": [
+            "hypertext",
+            "markup",
+            "language"
+          ]
+        },
+        {
+          "category": "📜 History",
+          "prompt": "In which year did World War II end?",
+          "responseText": "1945.",
+          "score": 100,
+          "ms": 306,
+          "error": null,
+          "matched": [
+            "1945"
+          ],
+          "keywords": [
+            "1945"
+          ]
+        },
+        {
+          "category": "📜 History",
+          "prompt": "Who was the first person to walk on the Moon?",
+          "responseText": "Neil Armstrong.",
+          "score": 100,
+          "ms": 227,
+          "error": null,
+          "matched": [
+            "armstrong",
+            "neil"
+          ],
+          "keywords": [
+            "armstrong",
+            "neil"
+          ]
+        },
+        {
+          "category": "🧠 Logic",
+          "prompt": "If all cats are animals and all animals need food, do cats need food? Answer yes or no.",
+          "responseText": "Yes.",
+          "score": 100,
+          "ms": 223,
+          "error": null,
+          "matched": [
+            "yes"
+          ],
+          "keywords": [
+            "yes"
+          ]
+        },
+        {
+          "category": "🧠 Logic",
+          "prompt": "What comes next in the sequence: 2, 4, 8, 16, __?",
+          "responseText": "32.",
+          "score": 100,
+          "ms": 334,
+          "error": null,
+          "matched": [
+            "32"
+          ],
+          "keywords": [
+            "32"
+          ]
+        }
+      ]
+    },
+    {
+      "model": "LLaMA 3.1 8B (Instant)",
+      "modelId": "llama-3.1-8b-instant",
+      "provider": "Groq",
+      "avgScore": 90,
+      "avgMs": 274,
+      "availability": 100,
+      "successCount": 15,
+      "failCount": 0,
+      "totalTests": 15,
+      "results": [
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "What is the capital of France?",
+          "responseText": "The capital of France is Paris.",
+          "score": 100,
+          "ms": 315,
+          "error": null,
+          "matched": [
+            "paris"
+          ],
+          "keywords": [
+            "paris"
+          ]
+        },
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "Who invented the telephone?",
+          "responseText": "Alexander Graham Bell is credited with inventing the first practical telephone in 1876.",
+          "score": 100,
+          "ms": 119,
+          "error": null,
+          "matched": [
+            "bell",
+            "alexander"
+          ],
+          "keywords": [
+            "bell",
+            "alexander"
+          ]
+        },
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "What is the speed of light in km/s? Give only the number.",
+          "responseText": "299792.5",
+          "score": 50,
+          "ms": 251,
+          "error": null,
+          "matched": [
+            "299"
+          ],
+          "keywords": [
+            "299",
+            "300"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "A train travels at 60 mph for 2.5 hours. How many miles does it travel? Answer with the number only.",
+          "responseText": "150",
+          "score": 100,
+          "ms": 115,
+          "error": null,
+          "matched": [
+            "150"
+          ],
+          "keywords": [
+            "150"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "What is 17 multiplied by 23? Answer with the number only.",
+          "responseText": "391",
+          "score": 100,
+          "ms": 192,
+          "error": null,
+          "matched": [
+            "391"
+          ],
+          "keywords": [
+            "391"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "If you have 3 apples and give away 2, how many do you have?",
+          "responseText": "You have 1 apple.",
+          "score": 50,
+          "ms": 280,
+          "error": null,
+          "matched": [
+            "1"
+          ],
+          "keywords": [
+            "1",
+            "one"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What is the chemical formula for water?",
+          "responseText": "The chemical formula for water is H2O.",
+          "score": 50,
+          "ms": 306,
+          "error": null,
+          "matched": [
+            "h2o"
+          ],
+          "keywords": [
+            "h2o",
+            "h₂o"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What planet is closest to the Sun?",
+          "responseText": "Mercury is the planet closest to the Sun.",
+          "score": 100,
+          "ms": 203,
+          "error": null,
+          "matched": [
+            "mercury"
+          ],
+          "keywords": [
+            "mercury"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What process do plants use to make food from sunlight?",
+          "responseText": "Plants use photosynthesis to make food from sunlight.",
+          "score": 100,
+          "ms": 421,
+          "error": null,
+          "matched": [
+            "photosynthesis"
+          ],
+          "keywords": [
+            "photosynthesis"
+          ]
+        },
+        {
+          "category": "💻 Coding",
+          "prompt": "Write a simple Python function to check if a number is even. Show code only.",
+          "responseText": "```python\ndef is_even(n):\n    return n % 2 == 0\n```",
+          "score": 100,
+          "ms": 282,
+          "error": null,
+          "matched": [
+            "def",
+            "return",
+            "%",
+            "== 0",
+            "even"
+          ],
+          "keywords": [
+            "def",
+            "return",
+            "%",
+            "== 0",
+            "even"
+          ]
+        },
+        {
+          "category": "💻 Coding",
+          "prompt": "What does HTML stand for?",
+          "responseText": "HTML stands for HyperText Markup Language.",
+          "score": 100,
+          "ms": 303,
+          "error": null,
+          "matched": [
+            "hypertext",
+            "markup",
+            "language"
+          ],
+          "keywords": [
+            "hypertext",
+            "markup",
+            "language"
+          ]
+        },
+        {
+          "category": "📜 History",
+          "prompt": "In which year did World War II end?",
+          "responseText": "World War II officially ended in two stages: \n\n1. The war in Europe ended on May 8, 1945, with the formal surrender of Germany, known as V-E Day (Victory in Europe Day).\n2. The war in the Pacific ended on September 2, 1945, with the formal surrender of Japan, known as V-J Day (Victory over Japan Day",
+          "score": 100,
+          "ms": 213,
+          "error": null,
+          "matched": [
+            "1945"
+          ],
+          "keywords": [
+            "1945"
+          ]
+        },
+        {
+          "category": "📜 History",
+          "prompt": "Who was the first person to walk on the Moon?",
+          "responseText": "Neil Armstrong was the first person to walk on the Moon. He stepped onto the lunar surface on July 20, 1969, during the Apollo 11 mission.",
+          "score": 100,
+          "ms": 205,
+          "error": null,
+          "matched": [
+            "armstrong",
+            "neil"
+          ],
+          "keywords": [
+            "armstrong",
+            "neil"
+          ]
+        },
+        {
+          "category": "🧠 Logic",
+          "prompt": "If all cats are animals and all animals need food, do cats need food? Answer yes or no.",
+          "responseText": "Yes.",
+          "score": 100,
+          "ms": 204,
+          "error": null,
+          "matched": [
+            "yes"
+          ],
+          "keywords": [
+            "yes"
+          ]
+        },
+        {
+          "category": "🧠 Logic",
+          "prompt": "What comes next in the sequence: 2, 4, 8, 16, __?",
+          "responseText": "The sequence is obtained by doubling the previous term. \n\nSo, the next number in the sequence would be: 32.",
+          "score": 100,
+          "ms": 703,
+          "error": null,
+          "matched": [
+            "32"
+          ],
+          "keywords": [
+            "32"
+          ]
+        }
+      ]
+    },
+    {
+      "model": "LLaMA 4 Scout 17B",
+      "modelId": "meta-llama/llama-4-scout-17b-16e-instruct",
+      "provider": "Groq",
+      "avgScore": 90,
+      "avgMs": 216,
+      "availability": 100,
+      "successCount": 15,
+      "failCount": 0,
+      "totalTests": 15,
+      "results": [
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "What is the capital of France?",
+          "responseText": "The capital of France is Paris.",
+          "score": 100,
+          "ms": 453,
+          "error": null,
+          "matched": [
+            "paris"
+          ],
+          "keywords": [
+            "paris"
+          ]
+        },
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "Who invented the telephone?",
+          "responseText": "Alexander Graham Bell is credited with inventing the telephone. He filed the first patent for a telephone on March 7, 1876, and is widely recognized as its inventor. However, there is some controversy over whether he was the sole inventor, as other inventors, such as Elisha Gray and Antonio Meucci, ",
+          "score": 100,
+          "ms": 379,
+          "error": null,
+          "matched": [
+            "bell",
+            "alexander"
+          ],
+          "keywords": [
+            "bell",
+            "alexander"
+          ]
+        },
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "What is the speed of light in km/s? Give only the number.",
+          "responseText": "299792",
+          "score": 50,
+          "ms": 201,
+          "error": null,
+          "matched": [
+            "299"
+          ],
+          "keywords": [
+            "299",
+            "300"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "A train travels at 60 mph for 2.5 hours. How many miles does it travel? Answer with the number only.",
+          "responseText": "150",
+          "score": 100,
+          "ms": 114,
+          "error": null,
+          "matched": [
+            "150"
+          ],
+          "keywords": [
+            "150"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "What is 17 multiplied by 23? Answer with the number only.",
+          "responseText": "391",
+          "score": 100,
+          "ms": 111,
+          "error": null,
+          "matched": [
+            "391"
+          ],
+          "keywords": [
+            "391"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "If you have 3 apples and give away 2, how many do you have?",
+          "responseText": "You have 1 apple left.",
+          "score": 50,
+          "ms": 174,
+          "error": null,
+          "matched": [
+            "1"
+          ],
+          "keywords": [
+            "1",
+            "one"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What is the chemical formula for water?",
+          "responseText": "The chemical formula for water is H2O.",
+          "score": 50,
+          "ms": 128,
+          "error": null,
+          "matched": [
+            "h2o"
+          ],
+          "keywords": [
+            "h2o",
+            "h₂o"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What planet is closest to the Sun?",
+          "responseText": "Mercury is the planet closest to the Sun.",
+          "score": 100,
+          "ms": 143,
+          "error": null,
+          "matched": [
+            "mercury"
+          ],
+          "keywords": [
+            "mercury"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What process do plants use to make food from sunlight?",
+          "responseText": "Photosynthesis.",
+          "score": 100,
+          "ms": 329,
+          "error": null,
+          "matched": [
+            "photosynthesis"
+          ],
+          "keywords": [
+            "photosynthesis"
+          ]
+        },
+        {
+          "category": "💻 Coding",
+          "prompt": "Write a simple Python function to check if a number is even. Show code only.",
+          "responseText": "```python\ndef is_even(num: int) -> bool:\n    return num % 2 == 0\n\n# Example usage:\ndef main():\n    print(is_even(10))  # True\n    print(is_even(11))  # False\n\nif __name__ == \"__main__\":\n    main()\n```",
+          "score": 100,
+          "ms": 310,
+          "error": null,
+          "matched": [
+            "def",
+            "return",
+            "%",
+            "== 0",
+            "even"
+          ],
+          "keywords": [
+            "def",
+            "return",
+            "%",
+            "== 0",
+            "even"
+          ]
+        },
+        {
+          "category": "💻 Coding",
+          "prompt": "What does HTML stand for?",
+          "responseText": "HyperText Markup Language.",
+          "score": 100,
+          "ms": 119,
+          "error": null,
+          "matched": [
+            "hypertext",
+            "markup",
+            "language"
+          ],
+          "keywords": [
+            "hypertext",
+            "markup",
+            "language"
+          ]
+        },
+        {
+          "category": "📜 History",
+          "prompt": "In which year did World War II end?",
+          "responseText": "World War II ended in 1945. The war in Europe ended on May 8, 1945 (V-E Day), and the war in the Pacific ended on September 2, 1945 (V-J Day), with the formal surrender of Japan.",
+          "score": 100,
+          "ms": 243,
+          "error": null,
+          "matched": [
+            "1945"
+          ],
+          "keywords": [
+            "1945"
+          ]
+        },
+        {
+          "category": "📜 History",
+          "prompt": "Who was the first person to walk on the Moon?",
+          "responseText": "Neil Armstrong was the first person to walk on the Moon. He stepped onto the lunar surface on July 20, 1969, as part of the Apollo 11 mission.",
+          "score": 100,
+          "ms": 181,
+          "error": null,
+          "matched": [
+            "armstrong",
+            "neil"
+          ],
+          "keywords": [
+            "armstrong",
+            "neil"
+          ]
+        },
+        {
+          "category": "🧠 Logic",
+          "prompt": "If all cats are animals and all animals need food, do cats need food? Answer yes or no.",
+          "responseText": "Yes.",
+          "score": 100,
+          "ms": 110,
+          "error": null,
+          "matched": [
+            "yes"
+          ],
+          "keywords": [
+            "yes"
+          ]
+        },
+        {
+          "category": "🧠 Logic",
+          "prompt": "What comes next in the sequence: 2, 4, 8, 16, __?",
+          "responseText": "The pattern of the sequence is obtained by multiplying the previous term by 2. \n\n2 * 2 = 4\n4 * 2 = 8\n8 * 2 = 16\n16 * 2 = 32\n\nSo, the next number in the sequence is: 32.",
+          "score": 100,
+          "ms": 239,
+          "error": null,
+          "matched": [
+            "32"
+          ],
+          "keywords": [
+            "32"
+          ]
+        }
+      ]
+    },
+    {
+      "model": "Gemini 2.5 Pro Preview",
+      "modelId": "gemini-2.5-pro-preview-03-25",
+      "provider": "Google",
+      "avgScore": 0,
+      "avgMs": 0,
+      "availability": 0,
+      "successCount": 0,
+      "failCount": 15,
+      "totalTests": 15,
+      "results": [
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "What is the capital of France?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "paris"
+          ]
+        },
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "Who invented the telephone?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "bell",
+            "alexander"
+          ]
+        },
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "What is the speed of light in km/s? Give only the number.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "299",
+            "300"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "A train travels at 60 mph for 2.5 hours. How many miles does it travel? Answer with the number only.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "150"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "What is 17 multiplied by 23? Answer with the number only.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "391"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "If you have 3 apples and give away 2, how many do you have?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "1",
+            "one"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What is the chemical formula for water?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "h2o",
+            "h₂o"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What planet is closest to the Sun?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "mercury"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What process do plants use to make food from sunlight?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "photosynthesis"
+          ]
+        },
+        {
+          "category": "💻 Coding",
+          "prompt": "Write a simple Python function to check if a number is even. Show code only.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "def",
+            "return",
+            "%",
+            "== 0",
+            "even"
+          ]
+        },
+        {
+          "category": "💻 Coding",
+          "prompt": "What does HTML stand for?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "hypertext",
+            "markup",
+            "language"
+          ]
+        },
+        {
+          "category": "📜 History",
+          "prompt": "In which year did World War II end?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "1945"
+          ]
+        },
+        {
+          "category": "📜 History",
+          "prompt": "Who was the first person to walk on the Moon?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "armstrong",
+            "neil"
+          ]
+        },
+        {
+          "category": "🧠 Logic",
+          "prompt": "If all cats are animals and all animals need food, do cats need food? Answer yes or no.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "yes"
+          ]
+        },
+        {
+          "category": "🧠 Logic",
+          "prompt": "What comes next in the sequence: 2, 4, 8, 16, __?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "32"
+          ]
+        }
+      ]
+    },
+    {
+      "model": "Gemini 2.5 Flash Preview",
+      "modelId": "gemini-2.5-flash-preview-04-17",
+      "provider": "Google",
+      "avgScore": 0,
+      "avgMs": 0,
+      "availability": 0,
+      "successCount": 0,
+      "failCount": 15,
+      "totalTests": 15,
+      "results": [
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "What is the capital of France?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "paris"
+          ]
+        },
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "Who invented the telephone?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "bell",
+            "alexander"
+          ]
+        },
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "What is the speed of light in km/s? Give only the number.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "299",
+            "300"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "A train travels at 60 mph for 2.5 hours. How many miles does it travel? Answer with the number only.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "150"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "What is 17 multiplied by 23? Answer with the number only.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "391"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "If you have 3 apples and give away 2, how many do you have?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "1",
+            "one"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What is the chemical formula for water?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "h2o",
+            "h₂o"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What planet is closest to the Sun?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "mercury"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What process do plants use to make food from sunlight?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "photosynthesis"
+          ]
+        },
+        {
+          "category": "💻 Coding",
+          "prompt": "Write a simple Python function to check if a number is even. Show code only.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "def",
+            "return",
+            "%",
+            "== 0",
+            "even"
+          ]
+        },
+        {
+          "category": "💻 Coding",
+          "prompt": "What does HTML stand for?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "hypertext",
+            "markup",
+            "language"
+          ]
+        },
+        {
+          "category": "📜 History",
+          "prompt": "In which year did World War II end?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "1945"
+          ]
+        },
+        {
+          "category": "📜 History",
+          "prompt": "Who was the first person to walk on the Moon?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "armstrong",
+            "neil"
+          ]
+        },
+        {
+          "category": "🧠 Logic",
+          "prompt": "If all cats are animals and all animals need food, do cats need food? Answer yes or no.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "yes"
+          ]
+        },
+        {
+          "category": "🧠 Logic",
+          "prompt": "What comes next in the sequence: 2, 4, 8, 16, __?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "32"
+          ]
+        }
+      ]
+    },
+    {
+      "model": "Gemini 2.0 Flash",
+      "modelId": "gemini-2.0-flash",
+      "provider": "Google",
+      "avgScore": 0,
+      "avgMs": 0,
+      "availability": 0,
+      "successCount": 0,
+      "failCount": 15,
+      "totalTests": 15,
+      "results": [
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "What is the capital of France?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "paris"
+          ]
+        },
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "Who invented the telephone?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "bell",
+            "alexander"
+          ]
+        },
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "What is the speed of light in km/s? Give only the number.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "299",
+            "300"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "A train travels at 60 mph for 2.5 hours. How many miles does it travel? Answer with the number only.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "150"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "What is 17 multiplied by 23? Answer with the number only.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "391"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "If you have 3 apples and give away 2, how many do you have?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "1",
+            "one"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What is the chemical formula for water?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "h2o",
+            "h₂o"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What planet is closest to the Sun?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "mercury"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What process do plants use to make food from sunlight?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "photosynthesis"
+          ]
+        },
+        {
+          "category": "💻 Coding",
+          "prompt": "Write a simple Python function to check if a number is even. Show code only.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "def",
+            "return",
+            "%",
+            "== 0",
+            "even"
+          ]
+        },
+        {
+          "category": "💻 Coding",
+          "prompt": "What does HTML stand for?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "hypertext",
+            "markup",
+            "language"
+          ]
+        },
+        {
+          "category": "📜 History",
+          "prompt": "In which year did World War II end?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "1945"
+          ]
+        },
+        {
+          "category": "📜 History",
+          "prompt": "Who was the first person to walk on the Moon?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "armstrong",
+            "neil"
+          ]
+        },
+        {
+          "category": "🧠 Logic",
+          "prompt": "If all cats are animals and all animals need food, do cats need food? Answer yes or no.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "yes"
+          ]
+        },
+        {
+          "category": "🧠 Logic",
+          "prompt": "What comes next in the sequence: 2, 4, 8, 16, __?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "32"
+          ]
+        }
+      ]
+    },
+    {
+      "model": "Gemini 2.0 Flash Lite",
+      "modelId": "gemini-2.0-flash-lite",
+      "provider": "Google",
+      "avgScore": 0,
+      "avgMs": 0,
+      "availability": 0,
+      "successCount": 0,
+      "failCount": 15,
+      "totalTests": 15,
+      "results": [
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "What is the capital of France?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "paris"
+          ]
+        },
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "Who invented the telephone?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "bell",
+            "alexander"
+          ]
+        },
+        {
+          "category": "🌍 General Knowledge",
+          "prompt": "What is the speed of light in km/s? Give only the number.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "299",
+            "300"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "A train travels at 60 mph for 2.5 hours. How many miles does it travel? Answer with the number only.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "150"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "What is 17 multiplied by 23? Answer with the number only.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "391"
+          ]
+        },
+        {
+          "category": "🧮 Math & Reasoning",
+          "prompt": "If you have 3 apples and give away 2, how many do you have?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "1",
+            "one"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What is the chemical formula for water?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "h2o",
+            "h₂o"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What planet is closest to the Sun?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "mercury"
+          ]
+        },
+        {
+          "category": "🔬 Science",
+          "prompt": "What process do plants use to make food from sunlight?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "photosynthesis"
+          ]
+        },
+        {
+          "category": "💻 Coding",
+          "prompt": "Write a simple Python function to check if a number is even. Show code only.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "def",
+            "return",
+            "%",
+            "== 0",
+            "even"
+          ]
+        },
+        {
+          "category": "💻 Coding",
+          "prompt": "What does HTML stand for?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "hypertext",
+            "markup",
+            "language"
+          ]
+        },
+        {
+          "category": "📜 History",
+          "prompt": "In which year did World War II end?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "1945"
+          ]
+        },
+        {
+          "category": "📜 History",
+          "prompt": "Who was the first person to walk on the Moon?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "armstrong",
+            "neil"
+          ]
+        },
+        {
+          "category": "🧠 Logic",
+          "prompt": "If all cats are animals and all animals need food, do cats need food? Answer yes or no.",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "yes"
+          ]
+        },
+        {
+          "category": "🧠 Logic",
+          "prompt": "What comes next in the sequence: 2, 4, 8, 16, __?",
+          "responseText": "",
+          "score": 0,
+          "ms": 0,
+          "error": "[GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googl",
+          "matched": [],
+          "keywords": [
+            "32"
+          ]
+        }
+      ]
+    }
+  ]
+}

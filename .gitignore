@@ -1,0 +1,18 @@
+node_modules/
+dist/
+build/
+.env
+.env.local
+.DS_Store
+*.log
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+studymind.db
+studymind.db-shm
+studymind.db-wal
+
+# Temporary files or scripts
+archive/
