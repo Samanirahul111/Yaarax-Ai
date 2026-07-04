@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { api } from '../api/client';
 import { Gem, User, Mail, Key, Shield, AlertTriangle, Rocket, Brain, Palette } from 'lucide-react';
+import iconLogo from '../assets/icons/yaarax_ai_logo.png';
 
 export default function AuthPage({ onAuth }) {
   const [mode, setMode]         = useState('login'); // 'login' | 'register' | '2fa'
@@ -86,8 +87,8 @@ export default function AuthPage({ onAuth }) {
         <div className="auth-card-glass">
           {/* Header */}
           <div className="auth-header">
-            <div className="auth-logo-v2" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ fontFamily: "Outfit, sans-serif", fontWeight: 900, fontSize: "32px", background: "linear-gradient(135deg, #FF7E67, #F9A826)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", letterSpacing: "-2px" }}>YX</span>
+            <div className="auth-logo-v2" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'transparent' }}>
+              <img src={iconLogo} alt="Yaarax AI Logo" style={{ width: '48px', height: '48px', objectFit: 'contain' }} />
             </div>
             <h1 className="auth-title-v2">Yaarax AI</h1>
             <p className="auth-subtitle-v2">
@@ -229,10 +230,10 @@ export default function AuthPage({ onAuth }) {
             <h2>Experience the Future</h2>
             <p>The most powerful all-in-one AI platform — Chat, Code, Images, Videos, Data &amp; more. Built for brilliance.</p>
             <div className="visual-stats">
-              <div className="stat-item"><span style={{display: 'flex', alignItems: 'center', marginRight: '10px'}}><Rocket size={20} color="var(--neon-cyan)" /></span> Blazing Fast</div>
-              <div className="stat-item"><span style={{display: 'flex', alignItems: 'center', marginRight: '10px'}}><Brain size={20} color="var(--neon-purple)" /></span> Multi-Model AI</div>
-              <div className="stat-item"><span style={{display: 'flex', alignItems: 'center', marginRight: '10px'}}><Palette size={20} color="var(--rose)" /></span> Image &amp; Video Gen</div>
-              <div className="stat-item"><span style={{display: 'flex', alignItems: 'center', marginRight: '10px'}}><Shield size={20} color="var(--emerald)" /></span> Secure &amp; Private</div>
+              <div className="stat-item"><span style={{display: 'flex', alignItems: 'center', marginRight: '10px', fontSize: '20px'}}>🚀</span> Blazing Fast</div>
+              <div className="stat-item"><span style={{display: 'flex', alignItems: 'center', marginRight: '10px', fontSize: '20px'}}>🧠</span> Multi-Model AI</div>
+              <div className="stat-item"><span style={{display: 'flex', alignItems: 'center', marginRight: '10px', fontSize: '20px'}}>🎨</span> Image & Video Gen</div>
+              <div className="stat-item"><span style={{display: 'flex', alignItems: 'center', marginRight: '10px', fontSize: '20px'}}>🔒</span> Secure & Private</div>
             </div>
           </div>
         </div>
