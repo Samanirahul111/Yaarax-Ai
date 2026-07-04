@@ -48,7 +48,8 @@ function renderMarkdown(text) {
       hash = Math.imul(31, hash) + prompt.charCodeAt(i) | 0;
     }
     const stableSeed = Math.abs(hash);
-    const url = `/api/chat/image?prompt=${encodeURIComponent(prompt.trim())}&seed=${stableSeed}`;
+    const API_BASE = import.meta.env.VITE_API_URL || '';
+    const url = `${API_BASE}/api/chat/image?prompt=${encodeURIComponent(prompt.trim())}&seed=${stableSeed}`;
     return `<div class="media-container generated-image">
       <img src="${url}" alt="${prompt}" loading="lazy" />
       <div class="media-label">AI Generated: ${prompt}</div>

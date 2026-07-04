@@ -294,7 +294,8 @@ class SlideshowVisualizer {
     this.imagePrompts.forEach((prompt, index) => {
       const img = new Image();
       const seed = this.seeds[index] || (12345 + index);
-      img.src = `/api/chat/image?prompt=${encodeURIComponent(prompt)}&seed=${seed}`;
+      const API_BASE = import.meta.env.VITE_API_URL || '';
+      img.src = `${API_BASE}/api/chat/image?prompt=${encodeURIComponent(prompt)}&seed=${seed}`;
       img.crossOrigin = 'anonymous';
       img.onload = () => {
         this.loadedCount++;
@@ -952,7 +953,7 @@ export default function VideoGenPage() {
                     />
                   ) : item.imagePrompts && item.imagePrompts.length > 0 ? (
                     <img
-                      src={`/api/chat/image?prompt=${encodeURIComponent(item.imagePrompts[0])}&seed=${item.seeds?.[0] || 123}`}
+                      src={`${import.meta.env.VITE_API_URL || ''}/api/chat/image?prompt=${encodeURIComponent(item.imagePrompts[0])}&seed=${item.seeds?.[0] || 123}`}
                       alt="Thumbnail"
                       className="vid-thumb-image"
                       style={{width:'100%', height:'100%', objectFit:'cover'}}
