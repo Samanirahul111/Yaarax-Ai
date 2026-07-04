@@ -132,7 +132,7 @@ async function handleOAuthUser(provider, profile, res) {
   const { id, email, username } = profile;
   
   if (!email) {
-    return res.redirect('http://localhost:5173/oauth-callback?error=' + encodeURIComponent('Email not provided by ' + provider));
+    return res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:5173'}/oauth-callback?error=` + encodeURIComponent('Email not provided by ' + provider));
   }
 
   try {
@@ -163,22 +163,22 @@ async function handleOAuthUser(provider, profile, res) {
     return res.redirect(`http://localhost:5173/oauth-callback?token=${token}`);
   } catch (err) {
     console.error(`OAuth DB Error (${provider}):`, err);
-    return res.redirect('http://localhost:5173/oauth-callback?error=Server_Error');
+    return res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:5173'}/oauth-callback?error=Server_Error`);
   }
 }
 
 // ─── GOOGLE OAUTH ─────────────────────────────────────────────────────────────
 router.get('/google', (req, res) => {
-  const redirectUri = encodeURIComponent('http://localhost:3001/api/auth/google/callback');
+  const redirectUri = encodeURIComponent(`${process.env.BACKEND_URL || 'http://localhost:3001'}/api/auth/google/callback`);
   const clientId = process.env.GOOGLE_CLIENT_ID;
-  if (!clientId) return res.redirect('http://localhost:5173/oauth-callback?error=Google_Not_Configured');
+  if (!clientId) return res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:5173'}/oauth-callback?error=Google_Not_Configured`);
   const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=email profile`;
   res.redirect(url);
 });
 
 router.get('/google/callback', async (req, res) => {
   const { code } = req.query;
-  const redirectUri = 'http://localhost:3001/api/auth/google/callback';
+  const redirectUri = `${process.env.BACKEND_URL || 'http://localhost:3001'}/api/auth/google/callback`;
   try {
     const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
       method: 'POST',
@@ -206,22 +206,22 @@ router.get('/google/callback', async (req, res) => {
     }, res);
   } catch (err) {
     console.error(err);
-    res.redirect('http://localhost:5173/oauth-callback?error=Authentication_Failed');
+    res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:5173'}/oauth-callback?error=Authentication_Failed`);
   }
 });
 
 // ─── GITHUB OAUTH ─────────────────────────────────────────────────────────────
 router.get('/github', (req, res) => {
-  const redirectUri = encodeURIComponent('http://localhost:3001/api/auth/github/callback');
+  const redirectUri = encodeURIComponent(`${process.env.BACKEND_URL || 'http://localhost:3001'}/api/auth/github/callback`);
   const clientId = process.env.GITHUB_CLIENT_ID;
-  if (!clientId) return res.redirect('http://localhost:5173/oauth-callback?error=GitHub_Not_Configured');
+  if (!clientId) return res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:5173'}/oauth-callback?error=GitHub_Not_Configured`);
   const url = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=user:email`;
   res.redirect(url);
 });
 
 router.get('/github/callback', async (req, res) => {
   const { code } = req.query;
-  const redirectUri = 'http://localhost:3001/api/auth/github/callback';
+  const redirectUri = `${process.env.BACKEND_URL || 'http://localhost:3001'}/api/auth/github/callback`;
   try {
     const tokenRes = await fetch('https://github.com/login/oauth/access_token', {
       method: 'POST',
@@ -257,22 +257,22 @@ router.get('/github/callback', async (req, res) => {
     }, res);
   } catch (err) {
     console.error(err);
-    res.redirect('http://localhost:5173/oauth-callback?error=Authentication_Failed');
+    res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:5173'}/oauth-callback?error=Authentication_Failed`);
   }
 });
 
 // ─── LINKEDIN OAUTH ───────────────────────────────────────────────────────────
 router.get('/linkedin', (req, res) => {
-  const redirectUri = encodeURIComponent('http://localhost:3001/api/auth/linkedin/callback');
+  const redirectUri = encodeURIComponent(`${process.env.BACKEND_URL || 'http://localhost:3001'}/api/auth/linkedin/callback`);
   const clientId = process.env.LINKEDIN_CLIENT_ID;
-  if (!clientId) return res.redirect('http://localhost:5173/oauth-callback?error=LinkedIn_Not_Configured');
+  if (!clientId) return res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:5173'}/oauth-callback?error=LinkedIn_Not_Configured`);
   const url = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=openid%20profile%20email`;
   res.redirect(url);
 });
 
 router.get('/linkedin/callback', async (req, res) => {
   const { code } = req.query;
-  const redirectUri = 'http://localhost:3001/api/auth/linkedin/callback';
+  const redirectUri = `${process.env.BACKEND_URL || 'http://localhost:3001'}/api/auth/linkedin/callback`;
   try {
     const tokenRes = await fetch('https://www.linkedin.com/oauth/v2/accessToken', {
       method: 'POST',
@@ -300,22 +300,22 @@ router.get('/linkedin/callback', async (req, res) => {
     }, res);
   } catch (err) {
     console.error(err);
-    res.redirect('http://localhost:5173/oauth-callback?error=Authentication_Failed');
+    res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:5173'}/oauth-callback?error=Authentication_Failed`);
   }
 });
 
 // ─── MICROSOFT OAUTH ──────────────────────────────────────────────────────────
 router.get('/microsoft', (req, res) => {
-  const redirectUri = encodeURIComponent('http://localhost:3001/api/auth/microsoft/callback');
+  const redirectUri = encodeURIComponent(`${process.env.BACKEND_URL || 'http://localhost:3001'}/api/auth/microsoft/callback`);
   const clientId = process.env.MICROSOFT_CLIENT_ID;
-  if (!clientId) return res.redirect('http://localhost:5173/oauth-callback?error=Microsoft_Not_Configured');
+  if (!clientId) return res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:5173'}/oauth-callback?error=Microsoft_Not_Configured`);
   const url = `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}&scope=User.Read%20openid%20profile%20email`;
   res.redirect(url);
 });
 
 router.get('/microsoft/callback', async (req, res) => {
   const { code } = req.query;
-  const redirectUri = 'http://localhost:3001/api/auth/microsoft/callback';
+  const redirectUri = `${process.env.BACKEND_URL || 'http://localhost:3001'}/api/auth/microsoft/callback`;
   try {
     const tokenRes = await fetch('https://login.microsoftonline.com/common/oauth2/v2.0/token', {
       method: 'POST',
@@ -343,7 +343,7 @@ router.get('/microsoft/callback', async (req, res) => {
     }, res);
   } catch (err) {
     console.error(err);
-    res.redirect('http://localhost:5173/oauth-callback?error=Authentication_Failed');
+    res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:5173'}/oauth-callback?error=Authentication_Failed`);
   }
 });
 
