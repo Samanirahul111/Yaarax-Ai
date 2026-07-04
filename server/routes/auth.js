@@ -160,7 +160,7 @@ async function handleOAuthUser(provider, profile, res) {
     }
 
     const token = generateToken(user.id);
-    return res.redirect(`http://localhost:5173/?token=${token}`);
+    return res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:5173'}/?token=${token}`);
   } catch (err) {
     console.error(`OAuth DB Error (${provider}):`, err);
     return res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:5173'}/?error=Server_Error`);
