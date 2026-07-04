@@ -315,7 +315,7 @@ function fileToPart(dataUrl) {
 
 async function callImageGeneration(prompt) {
   const seed = Math.floor(Math.random() * 10000000);
-  const imageUrl = `/api/chat/image?prompt=${encodeURIComponent(prompt.trim())}&seed=${seed}`;
+  const imageUrl = `${process.env.BACKEND_URL || ''}/api/chat/image?prompt=${encodeURIComponent(prompt.trim())}&seed=${seed}`;
   return `\n\n![Generated Image](${imageUrl})\n\n`;
 }
 

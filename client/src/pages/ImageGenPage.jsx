@@ -34,7 +34,8 @@ export default function ImageGenPage() {
     const selectedStyle = STYLE_PRESETS.find(s => s.id === style);
     const fullPrompt = `${prompt.trim()}, ${selectedStyle?.suffix || ''}`;
     const seed = Math.floor(Math.random() * 10000000);
-    const imgUrl = `/api/chat/image?prompt=${encodeURIComponent(fullPrompt)}&seed=${seed}`;
+    const API_BASE = import.meta.env.VITE_API_URL || '';
+    const imgUrl = `${API_BASE}/api/chat/image?prompt=${encodeURIComponent(fullPrompt)}&seed=${seed}`;
     const img = new Image();
     img.onload = () => {
       const item = { id: Date.now(), prompt: prompt.trim(), style, url: imgUrl, seed, createdAt: new Date().toISOString() };
