@@ -206,7 +206,20 @@ export default function SettingsModal({ theme, onThemeChange, onClose, user, onU
                   <button 
                     onClick={handleSaveAPIKeys} 
                     className="yaarax-btn-primary" 
-                    style={{ marginTop: '10px' }}
+                    style={{ 
+                      marginTop: '10px', 
+                      background: savedAPIKeys ? 'var(--green)' : 'linear-gradient(135deg, var(--cyan), var(--violet))',
+                      color: '#fff',
+                      border: 'none',
+                      padding: '10px 24px',
+                      borderRadius: '8px',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      transition: 'all 0.3s ease'
+                    }}
                   >
                     {savedAPIKeys ? <><Check size={16} style={{marginRight: '8px'}} /> Saved!</> : 'Save API Keys'}
                   </button>
