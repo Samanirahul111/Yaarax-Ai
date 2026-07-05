@@ -221,15 +221,7 @@ export default function FileAnalyzerPage() {
     }
   }, [output]);
 
-  const resetFile = () => {
-    setFile(null);
-    setFileData(null);
-    setExtractedText(null);
-    setIsNativeFile(false);
-    setOutput('');
-    setConvId(null);
-    if (fileInputRef.current) fileInputRef.current.value = '';
-  };
+
 
   async function handleFile(f) {
     if (!f) return;
