@@ -12,11 +12,17 @@ export default function SettingsModal({ theme, onThemeChange, onClose, user, onU
     cerebras: localStorage.getItem('yaarax_cerebras_key') || '',
     openrouter: localStorage.getItem('yaarax_openrouter_key') || '',
   }));
+  const [savedAPIKeys, setSavedAPIKeys] = useState(false);
 
   function setKey(provider, value) {
     setKeys(prev => ({...prev, [provider]: value}));
     if (value) localStorage.setItem(`yaarax_${provider}_key`, value);
     else localStorage.removeItem(`yaarax_${provider}_key`);
+  }
+
+  function handleSaveAPIKeys() {
+    setSavedAPIKeys(true);
+    setTimeout(() => setSavedAPIKeys(false), 2000);
   }
 
   const tabs = [
@@ -196,6 +202,14 @@ export default function SettingsModal({ theme, onThemeChange, onClose, user, onU
                     <label>Replicate API Key (Premium Video)</label>
                     <input type="password" placeholder="r8_..." className="settings-input" value={keys.replicate} onChange={e => setKey('replicate', e.target.value)} />
                   </div>
+
+                  <button 
+                    onClick={handleSaveAPIKeys} 
+                    className="yaarax-btn-primary" 
+                    style={{ marginTop: '10px' }}
+                  >
+                    {savedAPIKeys ? <><Check size={16} style={{marginRight: '8px'}} /> Saved!</> : 'Save API Keys'}
+                  </button>
                 </div>
               </div>
             )}
