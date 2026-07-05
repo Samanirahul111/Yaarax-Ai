@@ -494,7 +494,7 @@ router.post('/', async (req, res) => {
           let streamStarted = false;
           try {
             console.log(`📡 Trying Gemini: ${tier.modelId}`);
-            const activeGenAI = genAI; // Forcing .env key over frontend cache
+            const activeGenAI = (customGeminiKey && customGeminiKey !== 'null' && customGeminiKey !== 'undefined') ? new GoogleGenerativeAI(customGeminiKey) : genAI;
             const modelConfig = {
               model: tier.modelId,
               systemInstruction: systemPrompt,
