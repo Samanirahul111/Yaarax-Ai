@@ -5,9 +5,6 @@ import { User, Palette, Bot, Brain, Shield, Info, LogOut, X, Pencil, Check } fro
 
 export default function SettingsModal({ theme, onThemeChange, onClose, user, onUpdateUser, onLogout }) {
   const [activeTab, setActiveTab] = useState('profile');
-  const [memories, setMemories]   = useState([]);
-  const [memLoading, setMemLoading] = useState(false);
-  const [searchMemory, setSearchMemory] = useState('');
   const [keys, setKeys] = useState(() => ({
     replicate: localStorage.getItem('yaarax_replicate_key') || '',
     gemini: localStorage.getItem('yaarax_gemini_key') || '',
@@ -26,7 +23,6 @@ export default function SettingsModal({ theme, onThemeChange, onClose, user, onU
     { id: 'profile', label: 'Profile', icon: <User size={18} /> },
     { id: 'appearance', label: 'Appearance', icon: <Palette size={18} /> },
     { id: 'ai', label: 'AI Engines', icon: <Bot size={18} /> },
-    { id: 'memory', label: 'Memory', icon: <Brain size={18} /> },
     { id: 'security', label: 'Security', icon: <Shield size={18} /> },
     { id: 'about', label: 'About', icon: <Info size={18} /> },
   ];
@@ -36,34 +32,6 @@ export default function SettingsModal({ theme, onThemeChange, onClose, user, onU
     { id: 'darker', label: 'Void Black', desc: 'True black for OLED displays', color: '#000000' },
   ];
 
-  useEffect(() => {
-    if (activeTab === 'memory') loadMemories();
-  }, [activeTab]);
-
-  async function loadMemories() {
-    setMemLoading(true);
-    try {
-      const data = await api.getMemory();
-      setMemories(Array.isArray(data) ? data : []);
-    } catch {}
-    setMemLoading(false);
-  }
-
-  async function deleteMemory(key) {
-    await api.deleteMemory(key);
-    setMemories(prev => prev.filter(m => m.key !== key));
-  }
-
-  async function clearAllMemories() {
-    if (!confirm('Clear ALL memories? Yaarax AI will forget everything about you.')) return;
-    await api.clearMemory();
-    setMemories([]);
-  }
-
-  const filteredMemories = memories.filter(m => 
-    m.key.toLowerCase().includes(searchMemory.toLowerCase()) || 
-    m.value.toLowerCase().includes(searchMemory.toLowerCase())
-  );
 
   return (
     <div className="modal-backdrop" onClick={e => e.target === e.currentTarget && onClose()}>
@@ -228,45 +196,6 @@ export default function SettingsModal({ theme, onThemeChange, onClose, user, onU
               </div>
             )}
 
-            {/* MEMORY TAB */}
-            {activeTab === 'memory' && (
-              <div className="settings-section">
-                <div className="memory-actions-row">
-                  <input 
-                    type="text" 
-                    placeholder="Search memories..." 
-                    className="memory-search"
-                    value={searchMemory}
-                    onChange={(e) => setSearchMemory(e.target.value)}
-                  />
-                  <button className="memory-clear-btn-red" onClick={clearAllMemories}>Clear All</button>
-                </div>
-
-                {memLoading ? (
-                  <div className="mem-loader">Scanning Neural Pathways...</div>
-                ) : filteredMemories.length === 0 ? (
-                  <div className="mem-empty-state">
-                    <Brain size={48} style={{ opacity: 0.3 }} />
-                    <p>{searchMemory ? 'No matches found.' : 'Your AI has no personal memories yet.'}</p>
-                  </div>
-                ) : (
-                  <div className="mem-grid">
-                    {filteredMemories.map(m => (
-                      <div key={m.key} className="mem-card">
-                        <div className="mem-card-top">
-                          <span className="mem-tag">FACT</span>
-                          <button onClick={() => deleteMemory(m.key)}><X size={14} /></button>
-                        </div>
-                        <div className="mem-content">
-                          <strong>{m.key.replace(/_/g, ' ')}</strong>
-                          <p>{m.value}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
 
             {/* SECURITY TAB */}
             {activeTab === 'security' && (
