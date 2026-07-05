@@ -221,6 +221,15 @@ export default function FileAnalyzerPage() {
     }
   }, [output]);
 
+  const resetFile = () => {
+    setFile(null);
+    setFileData(null);
+    setExtractedText(null);
+    setIsNativeFile(false);
+    setOutput('');
+    setConvId(null);
+  };
+
   async function handleFile(f) {
     if (!f) return;
     setProcessing(true);

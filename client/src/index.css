@@ -1026,7 +1026,7 @@ body::after {
     inset: 0;
     background: rgba(0, 0, 0, .75);
     backdrop-filter: blur(6px);
-    z-index: 40;
+    z-index: 10000;
   }
 }
 
@@ -1070,6 +1070,7 @@ body::after {
     transform: perspective(800px) rotateY(25deg) translateX(-100%);
     box-shadow: var(--sh4);
     transform-origin: left center;
+    z-index: 10001;
   }
 
   .sidebar.open {
@@ -5936,13 +5937,22 @@ button.primary-btn, button.auth-btn-v2 {
   
   .hub-dock-nav {
     flex-direction: row;
-    gap: 15px;
-    width: 100%;
-    justify-content: space-around;
+    gap: 8px;
+    flex: 1;
+    justify-content: space-evenly;
   }
 
   .hub-dock-footer {
-    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0;
+    padding-left: 10px;
+    border-left: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .hub-dock-tooltip {
+    display: none !important;
   }
 
   .hub-dock-item {

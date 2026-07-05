@@ -166,6 +166,17 @@ export default function ResumeAnalyzerPage() {
     }
   }, [output]);
 
+  const resetFile = () => {
+    setFile(null);
+    setFileData(null);
+    setExtractedText(null);
+    setIsNativeFile(false);
+    setOutput('');
+    setConvId(null);
+    setUsePasted(false);
+    setPastedText('');
+  };
+
   async function handleFile(f) {
     if (!f) return;
     setProcessing(true);
