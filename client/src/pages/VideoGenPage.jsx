@@ -600,53 +600,27 @@ export default function VideoGenPage() {
     }, 200);
 
     try {
-      const replicateKey = localStorage.getItem('yaarax_replicate_key');
-
       setProgress(10);
-        setCurrentStage('🚀 Sending prompt to Replicate Minimax (video-01)...');
-        
-        const initRes = await api.generateReplicateVideo({
-          prompt: prompt.trim(), style, ratio, motion, duration: parsedDuration
-        }, replicateKey);
-        
-        let predictionId = initRes.id;
-        let predictionStatus = initRes.status;
-        let finalUrl = null;
+      setCurrentStage('🚀 Initializing Gemini Neural Engine...');
+      
+      const initRes = await api.generateVideo({
+        prompt: prompt.trim(), style, ratio, motion, duration: parsedDuration
+      });
 
-        // Poll Replicate API
-        while (predictionStatus !== 'succeeded' && predictionStatus !== 'failed' && predictionStatus !== 'canceled') {
-          await new Promise(r => setTimeout(r, 4000));
-          const pollRes = await api.pollReplicateVideo(predictionId, replicateKey);
-          predictionStatus = pollRes.status;
-          
-          setProgress(prev => {
-            const next = prev + Math.floor(Math.random() * 5);
-            return next > 95 ? 95 : next;
-          });
-          setCurrentStage(`⏳ Generating video... (Status: ${predictionStatus})`);
+      clearInterval(interval);
+      setProgress(100);
+      setCurrentStage('🎬 Video generation complete!');
 
-          if (predictionStatus === 'succeeded') {
-            finalUrl = pollRes.output; 
-            if (Array.isArray(finalUrl)) finalUrl = finalUrl[0];
-          }
-        }
-
-        clearInterval(interval);
-        if (predictionStatus !== 'succeeded' || !finalUrl) {
-          throw new Error(`Video generation failed with status: ${predictionStatus}`);
-        }
-
-        setProgress(100);
-        setCurrentStage('🎬 Video generation complete!');
-
-        setTimeout(() => {
-          const item = {
-            id: Date.now(),
-            prompt: prompt.trim(),
-            style, motion, ratio, duration: parsedDuration, fps,
-            videoUrl: finalUrl,
-            createdAt: new Date().toISOString(),
-          };
+      setTimeout(() => {
+        const item = {
+          id: Date.now(),
+          prompt: prompt.trim(),
+          style, motion, ratio, duration: parsedDuration, fps,
+          imagePrompts: initRes.imagePrompts,
+          code: initRes.code,
+          seeds: Array.from({length: initRes.imagePrompts?.length || 5}, () => Math.floor(Math.random() * 1000000)),
+          createdAt: new Date().toISOString(),
+        };
 
           const newGallery = [item, ...gallery].slice(0, 20);
           setGallery(newGallery);
