@@ -89,6 +89,53 @@
   --sh4: 0 40px 120px rgba(0, 0, 0, .9);
 }
 
+/* ── Custom Themes ── */
+[data-theme="darker"] {
+  --bg: #000000;
+  --bg-1: #0a0a0a;
+  --bg-2: #141414;
+  --bg-3: #1f1f1f;
+}
+
+[data-theme="dracula"] {
+  --bg: #282a36;
+  --bg-1: #383a59;
+  --bg-2: #44475a;
+  --bg-3: #6272a4;
+  --cyan: #8be9fd;
+  --violet: #bd93f9;
+  --rose: #ff5555;
+  --amber: #f1fa8c;
+  --green: #50fa7b;
+}
+
+[data-theme="ocean"] {
+  --bg: #051124;
+  --bg-1: #0b1f3c;
+  --bg-2: #132e55;
+  --bg-3: #1c3f70;
+  --cyan: #38bdf8;
+  --violet: #818cf8;
+}
+
+[data-theme="forest"] {
+  --bg: #061a10;
+  --bg-1: #0d2b1c;
+  --bg-2: #16402a;
+  --bg-3: #22593d;
+  --cyan: #4ade80;
+  --violet: #34d399;
+}
+
+[data-theme="rose"] {
+  --bg: #1a060a;
+  --bg-1: #2b0d14;
+  --bg-2: #401620;
+  --bg-3: #592230;
+  --cyan: #fb7185;
+  --violet: #f43f5e;
+}
+
 /* ── BASE ─────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;

@@ -29,7 +29,7 @@ const CAPABILITY_CHIPS = [
   '📄 File Analyzer', '🎬 Video Gen', '📅 Assistant',
 ];
 
-export default function ChatPage({ user, onUpdateUser, onLogout, initialMode = 'auto' }) {
+export default function ChatPage({ user, onUpdateUser, onLogout, initialMode = 'auto', theme, onThemeChange }) {
   const [conversations, setConversations] = useState([]);
   const [activeConvId, setActiveConvId] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -38,18 +38,11 @@ export default function ChatPage({ user, onUpdateUser, onLogout, initialMode = '
   const [mode, setMode] = useState(initialMode);
   const [showSettings, setShowSettings] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(() => typeof window !== 'undefined' && window.innerWidth > 768);
-  const [theme, setTheme] = useState(() => localStorage.getItem('yaarax_theme') || 'dark');
 
   // Sync mode if initialMode changes
   useEffect(() => {
     setMode(initialMode);
   }, [initialMode]);
-
-  // Apply theme
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('yaarax_theme', theme);
-  }, [theme]);
 
   // Load conversations on mount
   useEffect(() => {

@@ -21,13 +21,13 @@ const NAV = [
   { id: 'assistant', icon: <Bot size={24} />, label: 'Assistant', glow: 'rgba(249, 168, 38,.22)', active: 'rgba(249, 168, 38,.1)', border: 'rgba(249, 168, 38,.25)', text: '#F9A826' },
 ];
 
-export default function HubPage({ user, onUpdateUser, onLogout }) {
+export default function HubPage({ user, onUpdateUser, onLogout, theme, onThemeChange }) {
   const [active, setActive] = useState('chat');
   const [tooltip, setTooltip] = useState(null);
 
   function renderPage() {
     switch (active) {
-      case 'chat': return <ChatPage user={user} onUpdateUser={onUpdateUser} onLogout={onLogout} />;
+      case 'chat': return <ChatPage user={user} onUpdateUser={onUpdateUser} onLogout={onLogout} theme={theme} onThemeChange={onThemeChange} />;
       case 'image': return <ImageGenPage user={user} />;
       case 'video': return <VideoGenPage />;
       case 'file': return <FileAnalyzerPage user={user} />;
@@ -35,7 +35,7 @@ export default function HubPage({ user, onUpdateUser, onLogout }) {
       case 'code': return <CodePage user={user} />;
 
       case 'assistant': return <AssistantPage user={user} />;
-      default: return <ChatPage user={user} onUpdateUser={onUpdateUser} onLogout={onLogout} />;
+      default: return <ChatPage user={user} onUpdateUser={onUpdateUser} onLogout={onLogout} theme={theme} onThemeChange={onThemeChange} />;
     }
   }
 

@@ -8,6 +8,13 @@ import Background3D from './components/Background3D';
 export default function App() {
   const [user, setUser]       = useState(null);
   const [loading, setLoading] = useState(true);
+  const [theme, setTheme] = useState(() => localStorage.getItem('yaarax_theme') || 'dark');
+
+  // Apply theme globally
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('yaarax_theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     // Extract OAuth callback data
@@ -72,7 +79,7 @@ export default function App() {
     <>
       <Background3D />
       {user
-        ? <HubPage user={user} onUpdateUser={handleUpdateUser} onLogout={handleLogout} />
+        ? <HubPage user={user} onUpdateUser={handleUpdateUser} onLogout={handleLogout} theme={theme} onThemeChange={setTheme} />
         : <AuthPage onAuth={handleAuth} />}
     </>
   );

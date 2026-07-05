@@ -18,6 +18,10 @@ export default function SettingsModal({ theme, onThemeChange, onClose, user, onU
   const themes = [
     { id: 'dark',   label: 'Obsidian Night', desc: 'Sleek dark mode with subtle glows', color: '#13131a' },
     { id: 'darker', label: 'Void Black', desc: 'True black for OLED displays', color: '#000000' },
+    { id: 'dracula', label: 'Dracula', desc: 'A dark theme for vampires', color: '#282a36' },
+    { id: 'ocean', label: 'Deep Ocean', desc: 'Calming blue depths', color: '#051124' },
+    { id: 'forest', label: 'Midnight Forest', desc: 'Dark emerald hues', color: '#061a10' },
+    { id: 'rose', label: 'Crimson Night', desc: 'Deep ruby and rose', color: '#1a060a' },
   ];
 
 
