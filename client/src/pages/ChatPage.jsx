@@ -321,7 +321,7 @@ export default function ChatPage({ user, onUpdateUser, onLogout, initialMode = '
       {showSettings && (
         <SettingsModal
           theme={theme}
-          onThemeChange={setTheme}
+          onThemeChange={onThemeChange}
           onClose={() => setShowSettings(false)}
           user={user}
           onUpdateUser={onUpdateUser}
