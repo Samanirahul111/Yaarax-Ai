@@ -319,24 +319,6 @@ export default function SettingsModal({ theme, onThemeChange, onClose, user, onU
                 <h2>Yaarax AI Platform</h2>
                 <p className="version-text">Version 2.4.0-premium (Stable)</p>
                 
-                <div className="about-grid">
-                  <div className="about-item">
-                    <h4>Framework</h4>
-                    <p>React + Vite</p>
-                  </div>
-                  <div className="about-item">
-                    <h4>Storage</h4>
-                    <p>SQLite (Node Native)</p>
-                  </div>
-                  <div className="about-item">
-                    <h4>Models</h4>
-                    <p>Gemini, Llama, DeepSeek</p>
-                  </div>
-                  <div className="about-item">
-                    <h4>UI/UX</h4>
-                    <p>Obsidian & Neon</p>
-                  </div>
-                </div>
 
                 <div className="about-footer">
                   <p>© 2026 Yaarax AI Technologies. All rights reserved.</p>
