@@ -11,6 +11,7 @@ const convRoutes  = require('./routes/conversations');
 const chatRoutes  = require('./routes/chat');
 const memoryRoutes = require('./routes/memory');
 const tasksRoutes  = require('./routes/tasks');
+const adminRoutes  = require('./routes/admin');
 
 const app  = express();
 const PORT = process.env.PORT || 3001;
@@ -29,6 +30,7 @@ app.use('/api/conversations', convRoutes);
 app.use('/api/chat',          chatRoutes);
 app.use('/api/memory',        memoryRoutes);
 app.use('/api/tasks',         tasksRoutes);
+app.use('/api/admin',         adminRoutes);
 
 // Root endpoint
 app.get('/', (_, res) => res.json({ 
