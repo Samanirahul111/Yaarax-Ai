@@ -175,6 +175,7 @@ export default function ResumeAnalyzerPage() {
     setConvId(null);
     setUsePasted(false);
     setPastedText('');
+    if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
   async function handleFile(f) {

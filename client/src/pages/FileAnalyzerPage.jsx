@@ -228,6 +228,7 @@ export default function FileAnalyzerPage() {
     setIsNativeFile(false);
     setOutput('');
     setConvId(null);
+    if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
   async function handleFile(f) {
