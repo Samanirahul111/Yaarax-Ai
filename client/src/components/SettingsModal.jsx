@@ -5,19 +5,7 @@ import { User, Palette, Bot, Brain, Shield, Info, LogOut, X, Pencil, Check } fro
 
 export default function SettingsModal({ theme, onThemeChange, onClose, user, onUpdateUser, onLogout }) {
   const [activeTab, setActiveTab] = useState('profile');
-  const [keys, setKeys] = useState(() => ({
-    replicate: localStorage.getItem('yaarax_replicate_key') || '',
-    gemini: localStorage.getItem('yaarax_gemini_key') || '',
-    groq: localStorage.getItem('yaarax_groq_key') || '',
-    cerebras: localStorage.getItem('yaarax_cerebras_key') || '',
-    openrouter: localStorage.getItem('yaarax_openrouter_key') || '',
-  }));
 
-  function setKey(provider, value) {
-    setKeys(prev => ({...prev, [provider]: value}));
-    if (value) localStorage.setItem(`yaarax_${provider}_key`, value);
-    else localStorage.removeItem(`yaarax_${provider}_key`);
-  }
 
   const tabs = [
     { id: 'profile', label: 'Profile', icon: <User size={18} /> },
@@ -164,35 +152,7 @@ export default function SettingsModal({ theme, onThemeChange, onClose, user, onU
                   ))}
                 </div>
 
-                <div style={{ marginTop: '30px' }}>
-                  <h4>Custom API Keys</h4>
-                  <p className="section-desc" style={{ marginBottom: '12px' }}>Override default server keys by providing your own API keys for any provider.</p>
-                  
-                  <div className="settings-group">
-                    <label>Gemini API Key</label>
-                    <input type="password" placeholder="AIza..." className="settings-input" value={keys.gemini} onChange={e => setKey('gemini', e.target.value)} />
-                  </div>
-                  
-                  <div className="settings-group">
-                    <label>Groq API Key</label>
-                    <input type="password" placeholder="gsk_..." className="settings-input" value={keys.groq} onChange={e => setKey('groq', e.target.value)} />
-                  </div>
-                  
-                  <div className="settings-group">
-                    <label>Cerebras API Key</label>
-                    <input type="password" placeholder="csk-..." className="settings-input" value={keys.cerebras} onChange={e => setKey('cerebras', e.target.value)} />
-                  </div>
-                  
-                  <div className="settings-group">
-                    <label>OpenRouter API Key</label>
-                    <input type="password" placeholder="sk-or-v1-..." className="settings-input" value={keys.openrouter} onChange={e => setKey('openrouter', e.target.value)} />
-                  </div>
 
-                  <div className="settings-group">
-                    <label>Replicate API Key (Premium Video)</label>
-                    <input type="password" placeholder="r8_..." className="settings-input" value={keys.replicate} onChange={e => setKey('replicate', e.target.value)} />
-                  </div>
-                </div>
               </div>
             )}
 
