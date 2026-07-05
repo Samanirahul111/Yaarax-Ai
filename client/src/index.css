@@ -5910,14 +5910,20 @@ button.primary-btn, button.auth-btn-v2 {
   }
   
   .hub-dock {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     width: 100%;
     height: 75px;
     flex-direction: row;
     padding: 0 15px;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     border-right: none;
     border-top: 1px solid var(--b0);
-    z-index: 100;
+    z-index: 9999;
+    background: rgba(2, 6, 23, .95);
   }
   
   .hub-dock::after {
@@ -5928,18 +5934,25 @@ button.primary-btn, button.auth-btn-v2 {
     display: none;
   }
   
-  .hub-dock-actions {
+  .hub-dock-nav {
     flex-direction: row;
-    margin-top: 0;
     gap: 15px;
     width: 100%;
     justify-content: space-around;
   }
 
-  .nav-btn {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 0;
+  .hub-dock-footer {
+    display: none;
+  }
+
+  .hub-dock-item {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .hub-content {
+    height: 100%;
+    padding-bottom: 75px !important;
   }
   
   /* Settings Modal - Stack vertically */
@@ -5985,12 +5998,5 @@ button.primary-btn, button.auth-btn-v2 {
   .settings-nav-item.active {
     background: linear-gradient(135deg, var(--cyan), var(--violet));
     color: #fff;
-  }
-  
-  /* Main Content Area */
-  .main-content {
-    flex: 1;
-    width: 100%;
-    height: calc(100vh - 75px);
   }
 }
