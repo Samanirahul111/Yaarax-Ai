@@ -6,6 +6,7 @@ const { sendChunk } = require('../utils/stream');
 const { streamGroqResponse } = require('../utils/groq');
 const { streamCerebrasResponse } = require('../utils/cerebras');
 const { streamOpenRouterResponse } = require('../utils/openrouter');
+const { streamPollinationsResponse } = require('../utils/pollinations');
 const { encryptText, decryptText } = require('../utils/crypto');
 
 const router = express.Router();
@@ -620,7 +621,27 @@ router.post('/', async (req, res) => {
       }
 
       if (!fallbackSuccess) {
-        sendChunk(res, { error: `Our free AI servers are currently experiencing high traffic. Please try again in a moment, or add your own API Key in Settings for instant access!` });
+        console.log('📡 Groq and OpenRouter failed, trying final Pollinations fallback...');
+        try {
+          fullAiText = await streamPollinationsResponse({
+            res,
+            systemPrompt,
+            history: historyData,
+            userMessage: message || "Analyze",
+            sendChunk
+          });
+          if (fullAiText) fallbackSuccess = true;
+        } catch (pollErr) {
+          console.error('Pollinations fallback failed:', pollErr.message);
+        }
+      }
+
+      if (!fallbackSuccess) {
+        let finalError = `Our free AI servers are currently experiencing high traffic.`;
+        if (authError || groqErrMessage) {
+           finalError = `AI Error Details - ${authError ? 'Gemini: ' + authError : ''} ${groqErrMessage ? 'Groq: ' + groqErrMessage : ''}. Please add your own API Key in Settings for instant access!`;
+        }
+        sendChunk(res, { error: finalError.trim() });
         res.end();
         return;
       }
