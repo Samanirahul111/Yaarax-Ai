@@ -581,6 +581,9 @@ router.post('/', async (req, res) => {
     // ── GROQ & OPENROUTER FALLBACK (if Gemini failed or mode prefers speed) ──
     if (!geminiSuccess && !hasFiles) {
       let fallbackSuccess = false;
+      let groqErrMessage = '';
+      let orErrMessage = '';
+
       console.log('⚡ Falling back to Groq...');
       try {
         fullAiText = await streamGroqResponse({
@@ -594,6 +597,7 @@ router.post('/', async (req, res) => {
         if (fullAiText) fallbackSuccess = true;
       } catch (groqErr) {
         console.error('Groq also failed:', groqErr.message);
+        groqErrMessage = groqErr.message;
       }
 
       if (!fallbackSuccess) {
