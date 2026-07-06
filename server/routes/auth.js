@@ -19,9 +19,10 @@ router.post('/register', async (req, res) => {
 
   try {
     const hash   = await bcrypt.hash(password, 12);
-    const result = db.prepare(
-      'INSERT INTO users (username, email, password) VALUES (?, ?, ?)'
-    ).run(username.trim(), email.trim().toLowerCase(), hash);
+    const result = await db.queryRun(
+      'INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
+      [username.trim(), email.trim().toLowerCase(), hash]
+    );
 
     const token = generateToken(result.lastInsertRowid);
     res.status(201).json({
@@ -47,7 +48,7 @@ router.post('/login', async (req, res) => {
   }
 
   try {
-    const user = db.prepare('SELECT * FROM users WHERE email = ?').get(email.trim().toLowerCase());
+    const user = await db.queryGet('SELECT * FROM users WHERE email = ?', [email.trim().toLowerCase()]);
     if (!user) return res.status(401).json({ error: 'Invalid email or password' });
 
     const valid = await bcrypt.compare(password, user.password);
@@ -82,7 +83,7 @@ router.post('/verify-2fa', async (req, res) => {
   }
 
   try {
-    const user = db.prepare('SELECT * FROM users WHERE id = ?').get(userId);
+    const user = await db.queryGet('SELECT * FROM users WHERE id = ?', [userId]);
     if (!user) return res.status(404).json({ error: 'User not found' });
 
     // Proper 2FA logic: In a real app, use speakeasy/otplib.
@@ -107,12 +108,11 @@ router.post('/verify-2fa', async (req, res) => {
 });
 
 // ─── TOGGLE 2FA (requires auth) ───────────────────────────────────────────────
-router.post('/toggle-2fa', require('../auth').verifyToken, (req, res) => {
+router.post('/toggle-2fa', require('../auth').verifyToken, async (req, res) => {
   const { enabled, secret } = req.body;
   
   try {
-    db.prepare('UPDATE users SET two_factor_enabled = ?, two_factor_secret = ? WHERE id = ?')
-      .run(enabled ? 1 : 0, secret || null, req.userId);
+    await db.queryRun('UPDATE users SET two_factor_enabled = ?, two_factor_secret = ? WHERE id = ?', [enabled ? 1 : 0, secret || null, req.userId]);
     
     res.json({ success: true, enabled });
   } catch (err) {
@@ -121,8 +121,8 @@ router.post('/toggle-2fa', require('../auth').verifyToken, (req, res) => {
 });
 
 // ─── ME (verify token + return user) ─────────────────────────────────────────
-router.get('/me', require('../auth').verifyToken, (req, res) => {
-  const user = db.prepare('SELECT id, username, email, two_factor_enabled, created_at FROM users WHERE id = ?').get(req.userId);
+router.get('/me', require('../auth').verifyToken, async (req, res) => {
+  const user = await db.queryGet('SELECT id, username, email, two_factor_enabled, created_at FROM users WHERE id = ?', [req.userId]);
   if (!user) return res.status(404).json({ error: 'User not found' });
   res.json({ user });
 });
@@ -136,25 +136,25 @@ async function handleOAuthUser(provider, profile, res) {
   }
 
   try {
-    let user = db.prepare('SELECT * FROM users WHERE email = ?').get(email.toLowerCase());
+    let user = await db.queryGet('SELECT * FROM users WHERE email = ?', [email.toLowerCase()]);
     
     if (user) {
       if (!user.oauth_provider) {
-        db.prepare('UPDATE users SET oauth_provider = ?, oauth_id = ? WHERE id = ?')
-          .run(provider, id, user.id);
+        await db.queryRun('UPDATE users SET oauth_provider = ?, oauth_id = ? WHERE id = ?', [provider, id, user.id]);
       }
     } else {
       const randomPassword = crypto.randomBytes(32).toString('hex');
       const hash = await bcrypt.hash(randomPassword, 12);
       let finalUsername = username || email.split('@')[0];
-      const existing = db.prepare('SELECT id FROM users WHERE username = ?').get(finalUsername);
+      const existing = await db.queryGet('SELECT id FROM users WHERE username = ?', [finalUsername]);
       if (existing) {
         finalUsername = finalUsername + '_' + crypto.randomBytes(4).toString('hex');
       }
       
-      const result = db.prepare(
-        'INSERT INTO users (username, email, password, oauth_provider, oauth_id) VALUES (?, ?, ?, ?, ?)'
-      ).run(finalUsername, email.toLowerCase(), hash, provider, id);
+      const result = await db.queryRun(
+        'INSERT INTO users (username, email, password, oauth_provider, oauth_id) VALUES (?, ?, ?, ?, ?)',
+        [finalUsername, email.toLowerCase(), hash, provider, id]
+      );
       
       user = { id: result.lastInsertRowid };
     }

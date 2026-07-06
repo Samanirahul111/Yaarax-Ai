@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock AI | Admin Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon"><i data-lucide="shield-check"></i></div>
+                <h2>Rock Admin</h2>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-target="overview-section"><i data-lucide="layout-dashboard"></i> Overview</a>
+                <a href="#" class="nav-item" data-target="users-section"><i data-lucide="users"></i> Users</a>
+                <a href="#" class="nav-item" data-target="analytics-section"><i data-lucide="activity"></i> Analytics</a>
+                <a href="#" class="nav-item" data-target="settings-section"><i data-lucide="settings"></i> Settings</a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>System Status: <span>Online</span></p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-title">
+                    <h1 id="page-title">Dashboard Overview</h1>
+                    <p id="page-subtitle">Welcome back! Here's what's happening with Rock AI today.</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-icon" onclick="fetchStats()"><i data-lucide="refresh-cw"></i></button>
+                    <div class="profile-pic"><i data-lucide="user"></i></div>
+                </div>
+            </header>
+
+            <!-- Overview Section -->
+            <section id="overview-section" class="tab-section active">
+                <!-- Stats Grid -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon users-icon"><i data-lucide="users"></i></div>
+                        <div class="stat-info">
+                            <h3>Total Users</h3>
+                            <h2 id="total-users">--</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon msgs-icon"><i data-lucide="message-square"></i></div>
+                        <div class="stat-info">
+                            <h3>Total Messages</h3>
+                            <h2 id="total-messages">--</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon convs-icon"><i data-lucide="list"></i></div>
+                        <div class="stat-info">
+                            <h3>Conversations</h3>
+                            <h2 id="total-conversations">--</h2>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon active-icon"><i data-lucide="zap"></i></div>
+                        <div class="stat-info">
+                            <h3>Status</h3>
+                            <h2>Active</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Area Grid -->
+                <div class="content-grid">
+                    <!-- Feature Usage Section -->
+                    <div class="card feature-usage-card">
+                        <div class="card-header">
+                            <h2>Feature Usage</h2>
+                            <i data-lucide="pie-chart"></i>
+                        </div>
+                        <div class="card-body">
+                            <ul id="feature-usage-list" class="feature-list">
+                                <li class="loading-text">Loading data...</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Recent Users Section -->
+                    <div class="card recent-users-card">
+                        <div class="card-header">
+                            <h2>Recently Registered Users</h2>
+                            <i data-lucide="user-plus"></i>
+                        </div>
+                        <div class="card-body">
+                            <ul id="recent-users-list" class="users-list">
+                                <li class="loading-text">Loading data...</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Users Section -->
+            <section id="users-section" class="tab-section" style="display: none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>All Users Management</h2>
+                        <i data-lucide="users"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Joined At</th>
+                                        <th>2FA</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="users-table-body">
+                                    <tr><td colspan="5" class="loading-text">Loading users...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics-section" class="tab-section" style="display: none;">
+                <div class="content-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Platform Usage</h2>
+                            <i data-lucide="bar-chart-2"></i>
+                        </div>
+                        <div class="card-body">
+                            <div class="analytics-stats">
+                                <div class="analytics-item">
+                                    <span class="analytics-label">Total Tasks Created:</span>
+                                    <h3 id="analytics-tasks" class="analytics-value">--</h3>
+                                </div>
+                                <div class="analytics-item">
+                                    <span class="analytics-label">Total Memories Stored:</span>
+                                    <h3 id="analytics-memories" class="analytics-value">--</h3>
+                                </div>
+                                <div class="analytics-item">
+                                    <span class="analytics-label">User Messages vs AI Messages:</span>
+                                    <div id="analytics-msg-split" class="analytics-value small-text">--</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Top Active Users</h2>
+                            <i data-lucide="award"></i>
+                        </div>
+                        <div class="card-body">
+                            <ul id="top-users-list" class="feature-list">
+                                <li class="loading-text">Loading top users...</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings-section" class="tab-section" style="display: none;">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>System Information & Settings</h2>
+                        <i data-lucide="settings"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="settings-group">
+                            <h3>Dashboard Theme</h3>
+                            <div class="setting-item">
+                                <span>Dark Mode</span>
+                                <label class="switch">
+                                    <input type="checkbox" checked disabled>
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <hr class="divider">
+                        <div class="settings-group">
+                            <h3>Database Information</h3>
+                            <div class="setting-item">
+                                <span>Engine</span>
+                                <strong>node:sqlite</strong>
+                            </div>
+                            <div class="setting-item">
+                                <span>Connection Status</span>
+                                <strong style="color: var(--accent-2)">Connected</strong>
+                            </div>
+                            <div class="setting-item">
+                                <span>Mode</span>
+                                <strong>Read-Only (Analytics mode)</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="app.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

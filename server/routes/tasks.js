@@ -7,33 +7,36 @@ const router = express.Router();
 router.use(verifyToken);
 
 // GET all tasks for user
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   const { type } = req.query;
   let rows;
   const decryptTask = t => ({ ...t, title: decryptText(t.title), notes: decryptText(t.notes) });
   if (type) {
-    rows = db.prepare('SELECT * FROM tasks WHERE user_id = ? AND type = ? ORDER BY created_at DESC').all(req.userId, type).map(decryptTask);
+    const data = await db.queryAll('SELECT * FROM tasks WHERE user_id = ? AND type = ? ORDER BY created_at DESC', [req.userId, type]);
+    rows = data.map(decryptTask);
   } else {
-    rows = db.prepare('SELECT * FROM tasks WHERE user_id = ? ORDER BY created_at DESC').all(req.userId).map(decryptTask);
+    const data = await db.queryAll('SELECT * FROM tasks WHERE user_id = ? ORDER BY created_at DESC', [req.userId]);
+    rows = data.map(decryptTask);
   }
   res.json(rows);
 });
 
 // POST — create a task
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const { type = 'todo', title, notes = '', due_at = null, priority = 'medium' } = req.body;
   if (!title) return res.status(400).json({ error: 'title required' });
 
-  const result = db.prepare(
-    'INSERT INTO tasks (user_id, type, title, notes, due_at, priority) VALUES (?, ?, ?, ?, ?, ?)'
-  ).run(req.userId, type, encryptText(title), encryptText(notes), due_at, priority);
+  const result = await db.queryRun(
+    'INSERT INTO tasks (user_id, type, title, notes, due_at, priority) VALUES (?, ?, ?, ?, ?, ?)',
+    [req.userId, type, encryptText(title), encryptText(notes), due_at, priority]
+  );
 
   res.json({ id: result.lastInsertRowid, ok: true });
 });
 
 // PATCH — update task
-router.patch('/:id', (req, res) => {
-  const task = db.prepare('SELECT * FROM tasks WHERE id = ? AND user_id = ?').get(req.params.id, req.userId);
+router.patch('/:id', async (req, res) => {
+  const task = await db.queryGet('SELECT * FROM tasks WHERE id = ? AND user_id = ?', [req.params.id, req.userId]);
   if (!task) return res.status(404).json({ error: 'Not found' });
 
   const { title, notes, due_at, done, priority } = req.body;
@@ -43,7 +46,7 @@ router.patch('/:id', (req, res) => {
   const newDone = done !== undefined ? (done ? 1 : 0) : task.done;
   const newPriority = priority !== undefined ? priority : task.priority;
 
-  db.prepare(`
+  await db.queryRun(`
     UPDATE tasks SET
       title    = ?,
       notes    = ?,
@@ -51,16 +54,16 @@ router.patch('/:id', (req, res) => {
       done     = ?,
       priority = ?
     WHERE id = ? AND user_id = ?
-  `).run(
+  `, [
     newTitle, newNotes, newDueAt, newDone, newPriority,
     req.params.id, req.userId
-  );
+  ]);
   res.json({ ok: true });
 });
 
 // DELETE a task
-router.delete('/:id', (req, res) => {
-  db.prepare('DELETE FROM tasks WHERE id = ? AND user_id = ?').run(req.params.id, req.userId);
+router.delete('/:id', async (req, res) => {
+  await db.queryRun('DELETE FROM tasks WHERE id = ? AND user_id = ?', [req.params.id, req.userId]);
   res.json({ ok: true });
 });
 

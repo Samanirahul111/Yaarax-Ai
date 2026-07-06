@@ -398,11 +398,11 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ error: 'conversationId and message/files are required' });
   }
 
-  const conv = db.prepare('SELECT * FROM conversations WHERE id = ? AND user_id = ?').get(conversationId, req.userId);
+  const conv = await db.queryGet('SELECT * FROM conversations WHERE id = ? AND user_id = ?', [conversationId, req.userId]);
   if (!conv) return res.status(404).json({ error: 'Conversation not found' });
 
   // Load user memories and build context
-  const memories = db.prepare('SELECT key, value FROM user_memory WHERE user_id = ? ORDER BY updated_at DESC LIMIT 30').all(req.userId);
+  const memories = await db.queryAll('SELECT key, value FROM user_memory WHERE user_id = ? ORDER BY updated_at DESC LIMIT 30', [req.userId]);
   const memoryContext = memories.length > 0
     ? `\n\n🧠 USER MEMORY (facts you know about this user):\n${memories.map(m => `- ${m.key}: ${decryptText(m.value)}`).join('\n')}`
     : '';
@@ -410,9 +410,10 @@ router.post('/', async (req, res) => {
   // Save user message
   let displayContent = message || "";
   if (files && files.length > 0) displayContent += `\n\n[Attached Files: ${files.length}]`;
-  const userMsgResult = db.prepare(
-    'INSERT INTO messages (conversation_id, role, content) VALUES (?, ?, ?)'
-  ).run(conversationId, 'user', encryptText(displayContent.trim()));
+  const userMsgResult = await db.queryRun(
+    'INSERT INTO messages (conversation_id, role, content) VALUES (?, ?, ?)',
+    [conversationId, 'user', encryptText(displayContent.trim())]
+  );
 
   // Set headers for NDJSON streaming
   res.setHeader('Content-Type', 'application/x-ndjson');
@@ -424,10 +425,11 @@ router.post('/', async (req, res) => {
   const systemPrompt = BASE_SYSTEM + memoryContext + (MODE_PROMPTS[activeMode] || '');
 
   // Load conversation history
-  const historyData = db.prepare(
-    'SELECT role, content FROM messages WHERE conversation_id = ? AND id < ? ORDER BY created_at ASC LIMIT 20'
-  ).all(conversationId, userMsgResult.lastInsertRowid)
-  .map(m => ({ ...m, content: decryptText(m.content) }));
+  const historyDataRaw = await db.queryAll(
+    'SELECT role, content FROM messages WHERE conversation_id = ? AND id < ? ORDER BY created_at ASC LIMIT 20',
+    [conversationId, userMsgResult.lastInsertRowid]
+  );
+  const historyData = historyDataRaw.map(m => ({ ...m, content: decryptText(m.content) }));
 
   let fullAiText = '';
 
@@ -745,9 +747,10 @@ router.post('/', async (req, res) => {
     }
 
     // ── SAVE TO DB ─────────────────────────────────────────────────────────
-    db.prepare(
-      'INSERT INTO messages (conversation_id, role, content) VALUES (?, ?, ?)'
-    ).run(conversationId, 'assistant', encryptText(fullAiText));
+    await db.queryRun(
+      'INSERT INTO messages (conversation_id, role, content) VALUES (?, ?, ?)',
+      [conversationId, 'assistant', encryptText(fullAiText)]
+    );
 
     // ── AUTO-EXTRACT MEMORIES ──────────────────────────────────────────────
     const memoryRegex = /\[\s*REMEMBER\s*:\s*([^=\]]+?)\s*=\s*([^\]]+?)\s*\]/gi;
@@ -757,11 +760,11 @@ router.post('/', async (req, res) => {
       const memKey = memMatch[1].trim().toLowerCase().replace(/\s+/g, '_');
       const memValue = memMatch[2].trim();
       if (memKey && memValue) {
-        db.prepare(`
+        await db.queryRun(`
           INSERT INTO user_memory (user_id, key, value, updated_at)
           VALUES (?, ?, ?, datetime('now'))
           ON CONFLICT(user_id, key) DO UPDATE SET value = excluded.value, updated_at = excluded.updated_at
-        `).run(req.userId, memKey, encryptText(memValue));
+        `, [req.userId, memKey, encryptText(memValue)]);
         console.log(`💾 Memory saved: ${memKey} = ${memValue} (user ${req.userId})`);
       }
       // Remove memory tags from the displayed text
@@ -770,16 +773,16 @@ router.post('/', async (req, res) => {
 
     // Update DB with cleaned text if memories were extracted
     if (cleanedAiText !== fullAiText) {
-      db.prepare('UPDATE messages SET content = ? WHERE conversation_id = ? AND role = ? AND id = (SELECT MAX(id) FROM messages WHERE conversation_id = ? AND role = ?)')
-        .run(encryptText(cleanedAiText), conversationId, 'assistant', conversationId, 'assistant');
+      await db.queryRun('UPDATE messages SET content = ? WHERE conversation_id = ? AND role = ? AND id = (SELECT MAX(id) FROM messages WHERE conversation_id = ? AND role = ?)',
+        [encryptText(cleanedAiText), conversationId, 'assistant', conversationId, 'assistant']);
     }
 
-    const msgCount = db.prepare('SELECT COUNT(*) as c FROM messages WHERE conversation_id = ?').get(conversationId).c;
+    const msgCount = (await db.queryGet('SELECT COUNT(*) as c FROM messages WHERE conversation_id = ?', [conversationId])).c;
     if (msgCount <= 2) {
       const autoTitle = (message || "File Analysis").trim().slice(0, 60);
-      db.prepare("UPDATE conversations SET title = ?, updated_at = datetime('now') WHERE id = ?").run(encryptText(autoTitle), conversationId);
+      await db.queryRun("UPDATE conversations SET title = ?, updated_at = datetime('now') WHERE id = ?", [encryptText(autoTitle), conversationId]);
     } else {
-      db.prepare("UPDATE conversations SET updated_at = datetime('now') WHERE id = ?").run(conversationId);
+      await db.queryRun("UPDATE conversations SET updated_at = datetime('now') WHERE id = ?", [conversationId]);
     }
 
     res.end();
