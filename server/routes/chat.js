@@ -762,7 +762,7 @@ router.post('/', async (req, res) => {
       if (memKey && memValue) {
         await db.queryRun(`
           INSERT INTO user_memory (user_id, key, value, updated_at)
-          VALUES (?, ?, ?, datetime('now'))
+          VALUES (?, ?, ?, CURRENT_TIMESTAMP)
           ON CONFLICT(user_id, key) DO UPDATE SET value = excluded.value, updated_at = excluded.updated_at
         `, [req.userId, memKey, encryptText(memValue)]);
         console.log(`💾 Memory saved: ${memKey} = ${memValue} (user ${req.userId})`);
@@ -780,9 +780,9 @@ router.post('/', async (req, res) => {
     const msgCount = (await db.queryGet('SELECT COUNT(*) as c FROM messages WHERE conversation_id = ?', [conversationId])).c;
     if (msgCount <= 2) {
       const autoTitle = (message || "File Analysis").trim().slice(0, 60);
-      await db.queryRun("UPDATE conversations SET title = ?, updated_at = datetime('now') WHERE id = ?", [encryptText(autoTitle), conversationId]);
+      await db.queryRun("UPDATE conversations SET title = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?", [encryptText(autoTitle), conversationId]);
     } else {
-      await db.queryRun("UPDATE conversations SET updated_at = datetime('now') WHERE id = ?", [conversationId]);
+      await db.queryRun("UPDATE conversations SET updated_at = CURRENT_TIMESTAMP WHERE id = ?", [conversationId]);
     }
 
     res.end();

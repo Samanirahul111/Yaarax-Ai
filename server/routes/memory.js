@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
 
   await db.queryRun(`
     INSERT INTO user_memory (user_id, key, value, updated_at)
-    VALUES (?, ?, ?, datetime('now'))
+    VALUES (?, ?, ?, CURRENT_TIMESTAMP)
     ON CONFLICT(user_id, key) DO UPDATE SET value = excluded.value, updated_at = excluded.updated_at
   `, [req.userId, key.trim(), encryptText(value.trim())]);
 

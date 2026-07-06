@@ -45,7 +45,7 @@ router.patch('/:id', async (req, res) => {
   const newMode  = mode  ?? conv.mode;
 
   await db.queryRun(
-    "UPDATE conversations SET title = ?, mode = ?, updated_at = datetime('now') WHERE id = ?",
+    "UPDATE conversations SET title = ?, mode = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?",
     [newTitle, newMode, req.params.id]
   );
 
