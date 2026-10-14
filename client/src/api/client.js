@@ -16,13 +16,34 @@ function authHeaders() {
   };
 }
 
-const API_BASE = import.meta.env.VITE_API_URL || '';
+const API_BASE = import.meta.env.VITE_API_URL !== undefined 
+  ? import.meta.env.VITE_API_URL 
+  : (import.meta.env.PROD ? 'https://yaarax-ai.onrender.com' : '');
 
 async function request(url, options = {}) {
-  const res = await fetch(API_BASE + url, options);
-  const data = await res.json().catch(() => ({ error: `HTTP ${res.status}` }));
-  if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
-  return data;
+  const timeoutMs = options.timeoutMs || 25000;
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    const res = await fetch(API_BASE + url, {
+      ...options,
+      signal: options.signal || controller.signal,
+    });
+    clearTimeout(timeoutId);
+    const data = await res.json().catch(() => ({ error: `HTTP ${res.status}` }));
+    if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+    return data;
+  } catch (err) {
+    clearTimeout(timeoutId);
+    if (err.name === 'AbortError') {
+      throw new Error('Connection timed out. The backend server might be waking up (Render free tier takes ~45s) or offline. Please try again in a moment.');
+    }
+    if (err.message === 'Failed to fetch' || err.message.includes('NetworkError')) {
+      throw new Error('Cannot reach backend server. It may be sleeping or starting up. Please wait 30 seconds and try again.');
+    }
+    throw err;
+  }
 }
 
 export const api = {

@@ -2,6 +2,9 @@
   "name": "yaarax-ai-server",
   "version": "1.0.0",
   "main": "index.js",
+  "engines": {
+    "node": ">=22.5.0"
+  },
   "scripts": {
     "start": "node --experimental-sqlite index.js",
     "dev": "nodemon --exec \"node --experimental-sqlite\" index.js"
