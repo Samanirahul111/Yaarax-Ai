@@ -190,27 +190,6 @@ export default function AuthPage({ onAuth }) {
           </form>
 
           <div className="auth-footer-v2">
-            {mode !== '2fa' && (
-              <div className="oauth-section">
-                <div className="oauth-divider">
-                  <div className="oauth-divider-line" />
-                  <span className="oauth-divider-text">OR CONTINUE WITH</span>
-                  <div className="oauth-divider-line" />
-                </div>
-                
-                <div className="oauth-btns">
-                  <button type="button" className="oauth-btn" onClick={() => window.location.href = `${import.meta.env.VITE_API_URL || 'http://localhost:3001'}/api/auth/google`} title="Google">
-                    <img src="https://authjs.dev/img/providers/google.svg" alt="Google" width="20" height="20" />
-                  </button>
-                  <button type="button" className="oauth-btn" onClick={() => window.location.href = `${import.meta.env.VITE_API_URL || 'http://localhost:3001'}/api/auth/github`} title="GitHub" style={{ background: '#24292e' }}>
-                    <img src="https://authjs.dev/img/providers/github.svg" alt="GitHub" width="20" height="20" style={{ filter: 'invert(1)' }} />
-                  </button>
-                  <button type="button" className="oauth-btn" onClick={() => window.location.href = `${import.meta.env.VITE_API_URL || 'http://localhost:3001'}/api/auth/linkedin`} title="LinkedIn" style={{ background: '#0077b5' }}>
-                    <img src="https://authjs.dev/img/providers/linkedin.svg" alt="LinkedIn" width="20" height="20" style={{ filter: 'invert(1)' }} />
-                  </button>
-                </div>
-              </div>
-            )}
 
             {mode === '2fa' ? (
               <button onClick={switchMode} className="auth-link-v2">Back to Login</button>

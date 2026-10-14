@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock AI | Admin Dashboard</title>
+    <title>Yaarax AI | Admin Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
                 <div class="logo-icon"><i data-lucide="shield-check"></i></div>
-                <h2>Rock Admin</h2>
+                <h2>Yaarax Admin</h2>
             </div>
             <nav class="nav-menu">
-                <a href="#" class="nav-item active" data-target="overview-section"><i data-lucide="layout-dashboard"></i> Overview</a>
+                <a href="#" class="nav-item active" data-target="overview-section"><i
+                        data-lucide="layout-dashboard"></i> Overview</a>
                 <a href="#" class="nav-item" data-target="users-section"><i data-lucide="users"></i> Users</a>
-                <a href="#" class="nav-item" data-target="analytics-section"><i data-lucide="activity"></i> Analytics</a>
+                <a href="#" class="nav-item" data-target="analytics-section"><i data-lucide="activity"></i>
+                    Analytics</a>
                 <a href="#" class="nav-item" data-target="settings-section"><i data-lucide="settings"></i> Settings</a>
             </nav>
             <div class="sidebar-footer">
@@ -34,7 +39,7 @@
             <header class="top-header">
                 <div class="header-title">
                     <h1 id="page-title">Dashboard Overview</h1>
-                    <p id="page-subtitle">Welcome back! Here's what's happening with Rock AI today.</p>
+                    <p id="page-subtitle">Welcome back! Here's what's happening with Yaarax AI today.</p>
                 </div>
                 <div class="header-actions">
                     <button class="btn btn-icon" onclick="fetchStats()"><i data-lucide="refresh-cw"></i></button>
@@ -85,8 +90,10 @@
                             <i data-lucide="pie-chart"></i>
                         </div>
                         <div class="card-body">
-                            <ul id="feature-usage-list" class="feature-list">
-                                <li class="loading-text">Loading data...</li>
+                            <div class="chart-container" style="position: relative; height:250px; width:100%; display: flex; justify-content: center;">
+                                <canvas id="featureChart"></canvas>
+                            </div>
+                            <ul id="feature-usage-list" class="feature-list" style="display: none;">
                             </ul>
                         </div>
                     </div>
@@ -126,7 +133,9 @@
                                     </tr>
                                 </thead>
                                 <tbody id="users-table-body">
-                                    <tr><td colspan="5" class="loading-text">Loading users...</td></tr>
+                                    <tr>
+                                        <td colspan="5" class="loading-text">Loading users...</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -152,10 +161,13 @@
                                     <span class="analytics-label">Total Memories Stored:</span>
                                     <h3 id="analytics-memories" class="analytics-value">--</h3>
                                 </div>
-                                <div class="analytics-item">
+                                <div class="analytics-item" style="display: none;">
                                     <span class="analytics-label">User Messages vs AI Messages:</span>
                                     <div id="analytics-msg-split" class="analytics-value small-text">--</div>
                                 </div>
+                            </div>
+                            <div class="chart-container" style="position: relative; height:250px; width:100%; margin-top: 1.5rem; display: flex; justify-content: center;">
+                                <canvas id="analyticsChart"></canvas>
                             </div>
                         </div>
                     </div>
@@ -213,10 +225,11 @@
             </section>
         </main>
     </div>
-    
+
     <script src="app.js"></script>
     <script>
         lucide.createIcons();
     </script>
 </body>
+
 </html>

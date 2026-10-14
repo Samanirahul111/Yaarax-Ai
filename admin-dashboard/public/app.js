@@ -1,3 +1,11 @@
+let featureChartInstance = null;
+let analyticsChartInstance = null;
+
+if (typeof Chart !== 'undefined') {
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.font.family = "'Outfit', sans-serif";
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     fetchStats();
     initNavigation();
@@ -10,7 +18,7 @@ function initNavigation() {
     const pageSubtitle = document.getElementById('page-subtitle');
 
     const sectionInfo = {
-        'overview-section': { title: 'Dashboard Overview', subtitle: 'Welcome back! Here\'s what\'s happening with Rock AI today.' },
+        'overview-section': { title: 'Dashboard Overview', subtitle: 'Welcome back! Here\'s what\'s happening with Yaarax AI today.' },
         'users-section': { title: 'Users Management', subtitle: 'View and manage all registered users.' },
         'analytics-section': { title: 'Detailed Analytics', subtitle: 'Deep dive into your application usage and metrics.' },
         'settings-section': { title: 'System Settings', subtitle: 'Configure your dashboard and application settings.' }
@@ -19,7 +27,7 @@ function initNavigation() {
     navItems.forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
-            
+
             // Remove active class from all nav items
             navItems.forEach(nav => nav.classList.remove('active'));
             // Add active class to clicked item
@@ -40,7 +48,7 @@ function initNavigation() {
                     // small delay for css animation if needed
                     setTimeout(() => targetSection.classList.add('active'), 10);
                 }
-                
+
                 // Update header text
                 if (sectionInfo[targetId]) {
                     pageTitle.textContent = sectionInfo[targetId].title;
@@ -86,10 +94,10 @@ function updateUsersTable(users) {
     users.forEach(user => {
         const tr = document.createElement('tr');
         const date = new Date(user.created_at).toLocaleString();
-        const twoFaBadge = user.two_factor_enabled 
-            ? '<span class="badge badge-success">Enabled</span>' 
+        const twoFaBadge = user.two_factor_enabled
+            ? '<span class="badge badge-success">Enabled</span>'
             : '<span class="badge badge-danger">Disabled</span>';
-            
+
         tr.innerHTML = `
             <td>#${user.id}</td>
             <td><strong>${user.username}</strong></td>
@@ -110,6 +118,30 @@ function updateAnalytics(data) {
         const userMsgs = data.msgByRole.find(m => m.role === 'user')?.count || 0;
         const aiMsgs = data.msgByRole.find(m => m.role === 'model' || m.role === 'assistant')?.count || 0;
         msgSplit.innerHTML = `<strong>${userMsgs}</strong> User / <strong>${aiMsgs}</strong> AI`;
+        
+        const ctx = document.getElementById('analyticsChart').getContext('2d');
+        if (analyticsChartInstance) analyticsChartInstance.destroy();
+        analyticsChartInstance = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['User Messages', 'AI Messages'],
+                datasets: [{
+                    label: 'Message Count',
+                    data: [userMsgs, aiMsgs],
+                    backgroundColor: ['#3b82f6', '#8b5cf6'],
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: { 
+                    y: { beginAtZero: true, grid: { color: 'rgba(255,255,255,0.05)' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
     } else {
         msgSplit.textContent = 'No messages yet';
     }
@@ -143,45 +175,60 @@ function updateDashboard(data) {
     // Update Feature Usage
     const featureList = document.getElementById('feature-usage-list');
     featureList.innerHTML = '';
-    
-    if (data.featureUsage && data.featureUsage.length > 0) {
-        data.featureUsage.forEach(feature => {
-            const li = document.createElement('li');
-            
-            // Map modes to nice names and icons
-            let iconName = 'cpu';
-            let niceName = feature.mode;
-            
-            if (feature.mode === 'auto') { iconName = 'sparkles'; niceName = 'Auto Mode'; }
-            if (feature.mode === 'pdf') { iconName = 'file-text'; niceName = 'PDF Chat'; }
-            if (feature.mode === 'video') { iconName = 'video'; niceName = 'Video Generator'; }
-            if (feature.mode === 'web') { iconName = 'globe'; niceName = 'Web Chat'; }
-            if (feature.mode === 'vision') { iconName = 'camera'; niceName = 'Vision AI'; }
 
-            li.innerHTML = `
-                <div class="feature-name">
-                    <i data-lucide="${iconName}"></i>
-                    ${niceName}
-                </div>
-                <div class="feature-count">${feature.count} uses</div>
-            `;
-            featureList.appendChild(li);
+    if (data.featureUsage && data.featureUsage.length > 0) {
+        const labels = [];
+        const values = [];
+        const bgColors = ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ec4899'];
+
+        data.featureUsage.forEach(feature => {
+            let niceName = feature.mode;
+            if (feature.mode === 'auto') niceName = 'Auto Mode';
+            if (feature.mode === 'pdf') niceName = 'PDF Chat';
+            if (feature.mode === 'video') niceName = 'Video Generator';
+            if (feature.mode === 'web') niceName = 'Web Chat';
+            if (feature.mode === 'vision') niceName = 'Vision AI';
+            labels.push(niceName);
+            values.push(feature.count);
         });
-        lucide.createIcons(); // Re-initialize icons for dynamic content
+        
+        const ctx = document.getElementById('featureChart').getContext('2d');
+        if (featureChartInstance) featureChartInstance.destroy();
+        featureChartInstance = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: bgColors,
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right', labels: { boxWidth: 15, padding: 20 } }
+                },
+                cutout: '70%'
+            }
+        });
     } else {
+        featureList.style.display = 'block';
         featureList.innerHTML = '<li class="loading-text">No usage data found.</li>';
     }
 
     // Update Recent Users
     const usersList = document.getElementById('recent-users-list');
     usersList.innerHTML = '';
-    
+
     if (data.recentUsers && data.recentUsers.length > 0) {
         data.recentUsers.forEach(user => {
             const li = document.createElement('li');
             const initial = user.username ? user.username.charAt(0).toUpperCase() : '?';
-            const date = new Date(user.created_at).toLocaleDateString(undefined, { 
-                year: 'numeric', month: 'short', day: 'numeric' 
+            const date = new Date(user.created_at).toLocaleDateString(undefined, {
+                year: 'numeric', month: 'short', day: 'numeric'
             });
 
             li.innerHTML = `
